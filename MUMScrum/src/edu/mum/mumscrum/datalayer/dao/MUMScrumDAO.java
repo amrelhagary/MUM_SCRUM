@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.jpa.JpaEntityManager;
+import org.eclipse.persistence.queries.ReadAllQuery;
 import org.eclipse.persistence.sessions.UnitOfWork;
 
 public class MUMScrumDAO {
@@ -26,7 +27,7 @@ public class MUMScrumDAO {
 		return mumScrumDAO;
 	}
 
-	private void endTransaction(JpaEntityManager em, UnitOfWork uow) {
+	private void terminateConnection(JpaEntityManager em, UnitOfWork uow) {
 		uow.commit();
 		uow.release();
 		em.close();
@@ -36,18 +37,22 @@ public class MUMScrumDAO {
 		List<T> clones;
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
-		clones = uow.readAllObjects(clazz);
-		endTransaction(em, uow);
+		clones = (List<T>) uow.readAllObjects(clazz);
+		terminateConnection(em, uow);
 		return clones;
 	}
 
 	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
-			Expression expression) {
+			Expression expression, String columnName) {
 		List<T> clones;
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
-		clones = uow.readAllObjects(clazz, expression);
-		endTransaction(em, uow);
+		ReadAllQuery query = new ReadAllQuery();
+		query.setReferenceClass(clazz);
+		query.addAscendingOrdering(columnName);
+		query.setSelectionCriteria(expression);
+		clones = (List<T>) uow.executeQuery(query);
+		terminateConnection(em, uow);
 		return clones;
 	}
 
@@ -56,7 +61,7 @@ public class MUMScrumDAO {
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.readObject(clazz, expression);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 		return clone;
 	}
 
@@ -65,7 +70,7 @@ public class MUMScrumDAO {
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.registerObject(t);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 		return clone;
 	}
 
@@ -74,7 +79,7 @@ public class MUMScrumDAO {
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.deepMergeClone(t);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 		return clone;
 	}
 
@@ -83,7 +88,7 @@ public class MUMScrumDAO {
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.deleteObject(t);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 		return clone;
 	}
 
@@ -91,7 +96,7 @@ public class MUMScrumDAO {
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		uow.deleteAllObjects(t);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 	}
 
 	public <T> List<T> deleteAllObjectsBasedOnExpression(Class<T> clazz,
@@ -101,7 +106,7 @@ public class MUMScrumDAO {
 		UnitOfWork uow = em.getUnitOfWork();
 		clones = uow.readAllObjects(clazz, expression);
 		uow.deleteAllObjects(clones);
-		endTransaction(em, uow);
+		terminateConnection(em, uow);
 		return clones;
 	}
 }

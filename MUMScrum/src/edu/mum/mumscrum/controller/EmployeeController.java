@@ -1,5 +1,7 @@
 package edu.mum.mumscrum.controller;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,6 +17,7 @@ import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.datalayer.model.Employee;
 import edu.mum.mumscrum.service.EmployeeService;
+import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("EmployeeControllerWS")
 public class EmployeeController {
@@ -46,7 +49,9 @@ public class EmployeeController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllEmployees() {
-		JsonObject result = employeeService.getAllEmployees();
+		List<Employee> employeesList = employeeService.getAllEmployees();
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeesList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -54,7 +59,9 @@ public class EmployeeController {
 	@Path("/employee/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployeeById(@PathParam("id") String id) {
-		JsonObject result = employeeService.getEmployeeById(id);
+		Employee employeeResultObject = employeeService.getEmployeeById(id);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeeResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -63,7 +70,9 @@ public class EmployeeController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addEmployee(Employee employee) {
-		JsonObject result = employeeService.addEmployee(employee);
+		Employee employeeResultObject = employeeService.addEmployee(employee);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeeResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -72,7 +81,10 @@ public class EmployeeController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateEmployee(Employee employee) {
-		JsonObject result = employeeService.updateEmployee(employee);
+		Employee employeeResultObject = employeeService
+				.updateEmployee(employee);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeeResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -80,7 +92,9 @@ public class EmployeeController {
 	@Path("/employee/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteEmployeeById(@PathParam("id") String id) {
-		JsonObject result = employeeService.deleteEmployeeById(id);
+		List<Employee> employeesList = employeeService.deleteEmployeeById(id);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeesList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -89,7 +103,11 @@ public class EmployeeController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteEmployee(Employee employee) {
-		JsonObject result = employeeService.deleteEmployee(employee);
+		Employee employeeResultObject = employeeService
+				.deleteEmployee(employee);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(employeeResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
+
 }

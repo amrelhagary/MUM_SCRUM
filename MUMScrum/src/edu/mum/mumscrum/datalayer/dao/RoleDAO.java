@@ -2,6 +2,8 @@ package edu.mum.mumscrum.datalayer.dao;
 
 import java.util.List;
 
+import org.eclipse.persistence.expressions.ExpressionBuilder;
+
 import edu.mum.mumscrum.datalayer.model.Role;
 
 public class RoleDAO {
@@ -21,7 +23,8 @@ public class RoleDAO {
 	}
 
 	public List<Role> getAllRoles() {
-		return mumScrumDAO.getAllObjects(Role.class);
+		return mumScrumDAO.getAllObjectsByExpression(Role.class,
+				new ExpressionBuilder(), "name");
 	}
 
 }

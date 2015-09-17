@@ -23,24 +23,8 @@ public class EmployeeDAO {
 	}
 
 	public List<Employee> getAllEmployees() {
-		return mumScrumDAO.getAllObjects(Employee.class);
-	}
-
-	public static void main(String[] args) {
-		// List<Employee> employees =
-		// EmployeeDAO.getInstance().listAllEmployees();
-		// System.out.println(employees);
-		//
-		// Employee employee = new Employee();
-		// employee.setFirstName("Test222");
-		// employee.setLastName("Testing");
-		// employee.setRoleId("hoh");
-		// employee.setUsername("heeeh");
-		// employee.setPassword("heeeh");
-		// employee.setEmail("heeeh");
-		// employee.setPhone("heeeh");
-		//
-		// EmployeeDAO.getInstance().addNewEmployee(employee);
+		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
+				new ExpressionBuilder(), "id");
 	}
 
 	public Employee getEmployeeById(String id) {
