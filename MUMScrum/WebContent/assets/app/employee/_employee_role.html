@@ -1,2 +1,6 @@
-<select class="form-control" name="role" ng-model="employee.roleId" required ng-options="role.roleId as role.name for role in roles track by role.roleId">
+<select 
+class="form-control" 
+name="role" 
+ng-model="employee.role"
+ng-options="role.name for role in roles track by role.roleId" required>
 </select>

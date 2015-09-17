@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
@@ -36,8 +39,9 @@ public class Employee implements Serializable {
 
 	private String phone;
 
-	@Column(name = "ROLE_ID")
-	private long roleId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ROLE_ID")
+	private Role role;
 
 	private String username;
 
@@ -100,11 +104,11 @@ public class Employee implements Serializable {
 		this.username = username;
 	}
 
-	public long getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(long roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

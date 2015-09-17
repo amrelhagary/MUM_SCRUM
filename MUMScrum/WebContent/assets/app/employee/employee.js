@@ -27,6 +27,7 @@ angular
 				if(isValid)
 				{
 					EmployeeFactory.save($scope.employee,function(response){
+						console.log(response)
 						if(response.status == 'ok')
 						{
 							$location.path('/employee');
@@ -61,14 +62,15 @@ angular
   	}])
 	.controller('EmployeeEditCtrl',['$scope','EmployeeFactory','$routeParams','$location','toaster',function($scope,EmployeeFactory,$routeParams,$location,toaster){
 		var employeeId = $routeParams.id;
-		console.log(employeeId)
 		EmployeeFactory.get({id: employeeId},function(response){
 			$scope.employee = response.data;
+			// $scope.selectedOptions = { id: response.data.role.roleId , name: response.data.role.name };
 		})
 
 		$scope.updateEmployee = function(){
+			console.log('request',$scope.employee)
 			EmployeeFactory.update($scope.employee,function(response){
-				console.log(response);
+				console.log('response',response);
 				$location.path('/employee');
 				toaster.pop('success',"Update Employee","Employee Record Updated Successfully");
 			})
@@ -84,10 +86,9 @@ angular
 		return {
 			restrict: 'E',
 			templateUrl: 'employee/_employee_role.html',
-			link: function($scope){
+			link: function(scope,element,attrs){
 				EmployeeRole.get(function(response){
-					console.log(response)
-					$scope.roles = response.data;
+					scope.roles = response.data;
 				})
 			}
 		}
