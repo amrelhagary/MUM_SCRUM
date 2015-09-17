@@ -5,13 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the EMPLOYEE database table.
@@ -23,27 +20,38 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "EMPLOYEE_SEQ", sequenceName = "EMPLOYEE_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPLOYEE_SEQ")
 	private long id;
+
+	private String address;
 
 	private String email;
 
 	@Column(name = "FIRST_NAME")
 	private String firstName;
 
+	@Column(name = "HIRE_DATE")
+	private String hireDate;
+
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
 	private String password;
 
-	private String phone;
+	private long phone;
 
+	private long salary;
+
+	private String username;
+
+	// bi-directional many-to-one association to Role
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROLE_ID")
 	private Role role;
 
-	private String username;
+	// bi-directional many-to-one association to Status
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "STS_ID")
+	private Status status;
 
 	public Employee() {
 	}
@@ -54,6 +62,14 @@ public class Employee implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getEmail() {
@@ -72,6 +88,14 @@ public class Employee implements Serializable {
 		this.firstName = firstName;
 	}
 
+	public String getHireDate() {
+		return this.hireDate;
+	}
+
+	public void setHireDate(String hireDate) {
+		this.hireDate = hireDate;
+	}
+
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -88,12 +112,20 @@ public class Employee implements Serializable {
 		this.password = password;
 	}
 
-	public String getPhone() {
+	public long getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
+	}
+
+	public long getSalary() {
+		return this.salary;
+	}
+
+	public void setSalary(long salary) {
+		this.salary = salary;
 	}
 
 	public String getUsername() {
@@ -105,10 +137,19 @@ public class Employee implements Serializable {
 	}
 
 	public Role getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 }

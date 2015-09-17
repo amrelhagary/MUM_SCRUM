@@ -1,7 +1,12 @@
 package edu.mum.mumscrum.datalayer.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the "ROLE" database table.
@@ -17,7 +22,8 @@ public class Role implements Serializable {
 	@Column(name = "ROLE_ID")
 	private long roleId;
 
-	private String name;
+	@Column(name = "ROLE_DESC")
+	private String roleDesc;
 
 	public Role() {
 	}
@@ -30,12 +36,12 @@ public class Role implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getRoleDesc() {
+		return this.roleDesc;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleDesc(String roleDesc) {
+		this.roleDesc = roleDesc;
 	}
 
 }
