@@ -24,7 +24,7 @@ public class RoleDAO {
 
 	public List<Role> getAllRoles() {
 		return mumScrumDAO.getAllObjectsByExpression(Role.class,
-				new ExpressionBuilder(), "name");
+				new ExpressionBuilder(), "roleDesc");
 	}
 
 }
