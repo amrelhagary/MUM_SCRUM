@@ -9,15 +9,15 @@ angular
 		$routeProvider
 			.when('/employee', {
 				controller   : 'EmployeeListCtrl',
-				templateUrl  : 'employee/employee-list-view.html?' + Date.now()  
+				templateUrl  : 'employee/views/employee-list-view.html?' + Date.now()  
 			})
 			.when('/employee/add', {
 				controller   : 'EmployeeAddCtrl',
-				templateUrl  : 'employee/employee-add-view.html?' + Date.now()  
+				templateUrl  : 'employee/views/employee-add-view.html?' + Date.now()  
 			})
 			.when('/employee/edit/:id',{
 				controller: 'EmployeeEditCtrl',
-				templateUrl: 'employee/employee-edit-view.html?'+ Date.now()
+				templateUrl: 'employee/views/employee-edit-view.html?'+ Date.now()
 			})
 	}])
 	.controller('EmployeeAddCtrl', ['$scope','EmployeeFactory','$http','$location','toaster',
@@ -88,13 +88,13 @@ angular
 	.directive('employeeForm',[function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'employee/_form.html'
+			templateUrl: 'employee/views/_form.html'
 		}
 	}])
 	.directive('employeeRole',['EmployeeRole',function(EmployeeRole){
 		return {
 			restrict: 'E',
-			templateUrl: 'employee/_employee_role.html',
+			templateUrl: 'employee/views/_employee_role.html',
 			link: function(scope,element,attrs){
 				EmployeeRole.get(function(response){
 					scope.roles = response.data;
