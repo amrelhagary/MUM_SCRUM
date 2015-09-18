@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 
 public class UserStoryDAO {
@@ -22,10 +23,10 @@ public class UserStoryDAO {
 		}
 		return userStoryDAO;
 	}
-	
+
 	public List<Userstory> getAllUserStorys() {
 		return mumScrumDAO.getAllObjectsByExpression(Userstory.class,
-				new ExpressionBuilder(), "id");
+				new ExpressionBuilder(), SortingType.ASCENDING, "id");
 	}
 
 	public Userstory getUserStoryById(String id) {

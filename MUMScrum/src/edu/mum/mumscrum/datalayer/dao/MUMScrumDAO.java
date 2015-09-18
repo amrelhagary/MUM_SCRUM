@@ -10,6 +10,8 @@ import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.queries.ReadAllQuery;
 import org.eclipse.persistence.sessions.UnitOfWork;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
+
 public class MUMScrumDAO {
 
 	private static MUMScrumDAO mumScrumDAO;
@@ -43,13 +45,17 @@ public class MUMScrumDAO {
 	}
 
 	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
-			Expression expression, String columnName) {
+			Expression expression, SortingType sortingType, String columnName) {
 		List<T> clones;
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
 		UnitOfWork uow = em.getUnitOfWork();
 		ReadAllQuery query = new ReadAllQuery();
 		query.setReferenceClass(clazz);
-		query.addAscendingOrdering(columnName);
+		if (sortingType.equals(SortingType.ASCENDING)) {
+			query.addAscendingOrdering(columnName);
+		} else {
+			query.addDescendingOrdering(columnName);
+		}
 		query.setSelectionCriteria(expression);
 		clones = (List<T>) uow.executeQuery(query);
 		terminateConnection(em, uow);
