@@ -45,6 +45,16 @@ public class MUMScrumDAO {
 	}
 
 	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
+			Expression expression) {
+		List<T> clones;
+		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
+		UnitOfWork uow = em.getUnitOfWork();
+		clones = (List<T>) uow.readAllObjects(clazz, expression);
+		terminateConnection(em, uow);
+		return clones;
+	}
+
+	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
 			Expression expression, SortingType sortingType, String columnName) {
 		List<T> clones;
 		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
