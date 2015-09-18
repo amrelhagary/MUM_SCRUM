@@ -64,7 +64,10 @@ angular
 		var employeeId = $routeParams.id;
 		EmployeeFactory.get({id: employeeId},function(response){
 			$scope.employee = response.data;
-			// $scope.selectedOptions = { id: response.data.role.roleId , name: response.data.role.name };
+			$scope.status = [
+				{statusId: 1 , statusDesc: "Suspend"},
+				{statusId: 2, statusDesc: "Active" }
+			];
 		})
 
 		$scope.updateEmployee = function(){

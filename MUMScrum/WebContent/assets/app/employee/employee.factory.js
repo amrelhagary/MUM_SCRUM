@@ -1,3 +1,5 @@
+'use strict';
+
 angular
 	.module('scrumApp.employee')
 	.factory('EmployeeFactory', ['$resource',

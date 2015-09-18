@@ -8,7 +8,8 @@ var scrumApp = angular.module('scrumApp', [
   'ngAnimate',
   'toaster',
   'scrumApp.auth',
-  'scrumApp.employee'
+  'scrumApp.employee',
+  // 'scrumApp.product'
 ])
 .config(['$routeProvider',function($routeProvider){
 	// $routeProvider

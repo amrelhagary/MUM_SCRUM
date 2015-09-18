@@ -33,6 +33,17 @@
 		<label>phone</label>
 		<input class="form-control" type="text" name="phone" ng-model="employee.phone" />
 	</div>
+
+<!-- 	<div class="form-group">
+	{{ employee.status.statusId }}
+		<label>Status</label>
+		<select name="status" ng-model="employee.status.statusId" >
+			<option value="1">active</option>
+			<option value="2">suspend</option>
+		</select>
+	</div> -->
+	<label>Status</label>
+	<select ng-model="employee.status" ng-options="s.statusDesc for s in status track by s.statusId"></select>
 </div>
 
 <div class="box-footer">
