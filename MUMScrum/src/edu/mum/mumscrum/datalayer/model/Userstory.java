@@ -23,8 +23,8 @@ public class Userstory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "USERSTORY_SEQ1", sequenceName = "USERSTORY_SEQ1", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERSTORY_SEQ1")
+	@SequenceGenerator(name = "USERSTORY_SEQ", sequenceName = "USERSTORY_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERSTORY_SEQ")
 	private long id;
 
 	@Column(name = "EST_TIME_EFF")

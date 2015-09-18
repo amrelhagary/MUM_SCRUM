@@ -23,8 +23,8 @@ public class Sprint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SPRINT_SEQ1", sequenceName = "SPRINT_SEQ1", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SPRINT_SEQ1")
+	@SequenceGenerator(name = "SPRINT_SEQ", sequenceName = "SPRINT_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SPRINT_SEQ")
 	private long id;
 
 	@Column(name = "EST_TIME")
