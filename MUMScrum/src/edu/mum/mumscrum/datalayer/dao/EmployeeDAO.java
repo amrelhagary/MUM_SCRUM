@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
 public class EmployeeDAO {
@@ -24,7 +25,7 @@ public class EmployeeDAO {
 
 	public List<Employee> getAllEmployees() {
 		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
-				new ExpressionBuilder(), "id");
+				new ExpressionBuilder(), SortingType.ASCENDING, "id");
 	}
 
 	public Employee getEmployeeById(String id) {
