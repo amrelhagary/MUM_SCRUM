@@ -22,10 +22,16 @@ angular
 	}])
 	.controller('EmployeeAddCtrl', ['$scope','EmployeeFactory','$http','$location','toaster',
 		function($scope,EmployeeFactory,$http,$location,toaster){
+			$scope.status = [
+				{statusId: 1 , statusDesc: "Suspend"},
+				{statusId: 2, statusDesc: "Active" }
+			];
+
 			$scope.addEmployee = function(isValid)
 			{
 				if(isValid)
 				{
+					console.log($scope.employee)
 					EmployeeFactory.save($scope.employee,function(response){
 						console.log(response)
 						if(response.status == 'ok')

@@ -34,16 +34,24 @@
 		<input class="form-control" type="text" name="phone" ng-model="employee.phone" />
 	</div>
 
-<!-- 	<div class="form-group">
-	{{ employee.status.statusId }}
-		<label>Status</label>
-		<select name="status" ng-model="employee.status.statusId" >
-			<option value="1">active</option>
-			<option value="2">suspend</option>
-		</select>
-	</div> -->
+
 	<label>Status</label>
-	<select ng-model="employee.status" ng-options="s.statusDesc for s in status track by s.statusId"></select>
+	<select class="form-control" ng-model="employee.status" ng-options="s.statusDesc for s in status track by s.statusId"></select>
+
+	<div class="form-group">
+		<label>Hire Date</label>
+		<input class="form-control" type="text" name="hiredate" ng-model="employee.hireDate" />
+	</div>
+
+	<div class="form-group">
+		<label>Address</label>
+		<input class="form-control" type="text" name="address" ng-model="employee.address" />
+	</div>
+
+	<div class="form-group">
+		<label>Salary</label>
+		<input class="form-control" type="text" name="salary" ng-model="employee.salary" />
+	</div>
 </div>
 
 <div class="box-footer">
