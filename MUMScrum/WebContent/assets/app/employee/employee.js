@@ -23,8 +23,8 @@ angular
 	.controller('EmployeeAddCtrl', ['$scope','EmployeeFactory','$http','$location','toaster',
 		function($scope,EmployeeFactory,$http,$location,toaster){
 			$scope.status = [
-				{statusId: 1 , statusDesc: "Suspend"},
-				{statusId: 2, statusDesc: "Active" }
+				{statusId: 1 , statusDesc: "Active"},
+				{statusId: 2, statusDesc: "Suspend" }
 			];
 
 			$scope.addEmployee = function(isValid)
@@ -71,8 +71,8 @@ angular
 		EmployeeFactory.get({id: employeeId},function(response){
 			$scope.employee = response.data;
 			$scope.status = [
-				{statusId: 1 , statusDesc: "Suspend"},
-				{statusId: 2, statusDesc: "Active" }
+				{statusId: 1 , statusDesc: "Active"},
+				{statusId: 2, statusDesc: "Suspend" }
 			];
 		})
 
