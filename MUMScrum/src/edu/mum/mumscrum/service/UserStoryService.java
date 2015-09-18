@@ -3,6 +3,7 @@ package edu.mum.mumscrum.service;
 import java.util.List;
 
 import edu.mum.mumscrum.datalayer.dao.UserStoryDAO;
+import edu.mum.mumscrum.datalayer.model.Product;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 
 public class UserStoryService {
@@ -34,6 +35,10 @@ public class UserStoryService {
 
 	public List<Userstory> deleteUserStoryById(String id) {
 		return userStoryDAO.deleteUserStoryById(id);
+	}
+
+	public List<Userstory> getUserStoriesByProductId(String productId) {
+		return userStoryDAO.getUserStoriesByProductId(productId);
 	}
 
 }

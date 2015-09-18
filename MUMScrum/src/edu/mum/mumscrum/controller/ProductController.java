@@ -16,18 +16,22 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.datalayer.model.Product;
+import edu.mum.mumscrum.datalayer.model.Userstory;
 import edu.mum.mumscrum.service.ProductService;
+import edu.mum.mumscrum.service.UserStoryService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("ProductControllerWS")
 public class ProductController {
-	
+
 	private ProductService productService;
+	private UserStoryService userStoryService;
 
 	public ProductController() {
 		productService = new ProductService();
+		userStoryService = new UserStoryService();
 	}
-	
+
 	@GET
 	@Path("/product")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -49,6 +53,17 @@ public class ProductController {
 		return Response.status(200).entity(result.toString()).build();
 	}
 
+	@GET
+	@Path("/product/{id}/userStory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getProductUserStories(@PathParam("id") String productId) {
+		List<Userstory> userStoriesList = userStoryService
+				.getUserStoriesByProductId(productId);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(userStoriesList);
+		return Response.status(200).entity(result.toString()).build();
+	}
+
 	@POST
 	@Path("/product")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -65,8 +80,7 @@ public class ProductController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateProduct(Product product) {
-		Product productResultObject = productService
-				.updateProduct(product);
+		Product productResultObject = productService.updateProduct(product);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(productResultObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -87,8 +101,7 @@ public class ProductController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteProduct(Product product) {
-		Product productResultObject = productService
-				.deleteProduct(product);
+		Product productResultObject = productService.deleteProduct(product);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(productResultObject);
 		return Response.status(200).entity(result.toString()).build();

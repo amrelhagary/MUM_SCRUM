@@ -6,6 +6,7 @@ import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
+import edu.mum.mumscrum.datalayer.model.Product;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 
 public class UserStoryDAO {
@@ -49,6 +50,13 @@ public class UserStoryDAO {
 	public List<Userstory> deleteUserStoryById(String id) {
 		Expression expression = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Userstory.class,
+				expression);
+	}
+
+	public List<Userstory> getUserStoriesByProductId(String productId) {
+		Expression expression = new ExpressionBuilder().get("product")
+				.get("id").equal(productId);
+		return mumScrumDAO.getAllObjectsByExpression(Userstory.class,
 				expression);
 	}
 
