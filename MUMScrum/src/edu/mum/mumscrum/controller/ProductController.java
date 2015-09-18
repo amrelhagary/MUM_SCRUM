@@ -54,7 +54,7 @@ public class ProductController {
 	}
 
 	@GET
-	@Path("/product/{id}/userStory")
+	@Path("/product/{id}/userstory")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getProductUserStories(@PathParam("id") String productId) {
 		List<Userstory> userStoriesList = userStoryService

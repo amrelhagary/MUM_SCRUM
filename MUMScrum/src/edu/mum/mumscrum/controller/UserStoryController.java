@@ -29,7 +29,7 @@ public class UserStoryController {
 	}
 
 	@GET
-	@Path("/userStory")
+	@Path("/userstory")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllUserStorys() {
@@ -40,7 +40,7 @@ public class UserStoryController {
 	}
 
 	@GET
-	@Path("/userStory/{id}")
+	@Path("/userstory/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserStoryById(@PathParam("id") String id) {
 		Userstory userStoryResultObject = userStoryService.getUserStoryById(id);
@@ -50,7 +50,7 @@ public class UserStoryController {
 	}
 
 	@POST
-	@Path("/userStory")
+	@Path("/userstory")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUserStory(Userstory userstory) {
@@ -62,7 +62,7 @@ public class UserStoryController {
 	}
 
 	@PUT
-	@Path("/userStory")
+	@Path("/userstory")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUserStory(Userstory userstory) {
@@ -74,7 +74,7 @@ public class UserStoryController {
 	}
 
 	@DELETE
-	@Path("/userStory/{id}")
+	@Path("/userstory/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUserStoryById(@PathParam("id") String id) {
 		List<Userstory> userStorysList = userStoryService
@@ -85,7 +85,7 @@ public class UserStoryController {
 	}
 
 	@DELETE
-	@Path("/userStory")
+	@Path("/userstory")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUserStory(Userstory userstory) {
