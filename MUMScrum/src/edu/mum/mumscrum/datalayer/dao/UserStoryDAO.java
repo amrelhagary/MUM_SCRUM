@@ -1,5 +1,12 @@
 package edu.mum.mumscrum.datalayer.dao;
 
+import java.util.List;
+
+import org.eclipse.persistence.expressions.Expression;
+import org.eclipse.persistence.expressions.ExpressionBuilder;
+
+import edu.mum.mumscrum.datalayer.model.Userstory;
+
 public class UserStoryDAO {
 
 	private static UserStoryDAO userStoryDAO;
@@ -14,6 +21,34 @@ public class UserStoryDAO {
 			return new UserStoryDAO();
 		}
 		return userStoryDAO;
+	}
+	
+	public List<Userstory> getAllUserStorys() {
+		return mumScrumDAO.getAllObjectsByExpression(Userstory.class,
+				new ExpressionBuilder(), "id");
+	}
+
+	public Userstory getUserStoryById(String id) {
+		Expression expression = new ExpressionBuilder().get("id").equal(id);
+		return mumScrumDAO.getObjectByExpression(Userstory.class, expression);
+	}
+
+	public Userstory addUserStory(Userstory userstory) {
+		return mumScrumDAO.addObject(userstory);
+	}
+
+	public Userstory updateUserStory(Userstory userstory) {
+		return mumScrumDAO.updateObject(userstory);
+	}
+
+	public Userstory deleteUserStory(Userstory userstory) {
+		return mumScrumDAO.deleteObject(userstory);
+	}
+
+	public List<Userstory> deleteUserStoryById(String id) {
+		Expression expression = new ExpressionBuilder().get("id").equal(id);
+		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Userstory.class,
+				expression);
 	}
 
 }
