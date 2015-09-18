@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
 import edu.mum.mumscrum.datalayer.model.Role;
 
 public class RoleDAO {
@@ -24,7 +25,7 @@ public class RoleDAO {
 
 	public List<Role> getAllRoles() {
 		return mumScrumDAO.getAllObjectsByExpression(Role.class,
-				new ExpressionBuilder(), "name");
+				new ExpressionBuilder(), SortingType.ASCENDING, "roleDesc");
 	}
 
 }
