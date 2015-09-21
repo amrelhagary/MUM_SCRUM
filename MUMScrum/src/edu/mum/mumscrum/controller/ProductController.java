@@ -16,20 +16,16 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.datalayer.model.Product;
-import edu.mum.mumscrum.datalayer.model.Userstory;
 import edu.mum.mumscrum.service.ProductService;
-import edu.mum.mumscrum.service.UserStoryService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("ProductControllerWS")
 public class ProductController {
 
 	private ProductService productService;
-	private UserStoryService userStoryService;
 
 	public ProductController() {
 		productService = new ProductService();
-		userStoryService = new UserStoryService();
 	}
 
 	@GET
@@ -50,17 +46,6 @@ public class ProductController {
 		Product productResultObject = productService.getProductById(id);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(productResultObject);
-		return Response.status(200).entity(result.toString()).build();
-	}
-
-	@GET
-	@Path("/product/{id}/userstory")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProductUserStories(@PathParam("id") String productId) {
-		List<Userstory> userStoriesList = userStoryService
-				.getUserStoriesByProductId(productId);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoriesList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 

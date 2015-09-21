@@ -40,6 +40,17 @@ public class UserStoryController {
 	}
 
 	@GET
+	@Path("/product/{id}/userstory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUserStoriesByProductId(@PathParam("id") String productId) {
+		List<Userstory> userStoriesList = userStoryService
+				.getUserStoriesByProductId(productId);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(userStoriesList);
+		return Response.status(200).entity(result.toString()).build();
+	}
+
+	@GET
 	@Path("/userstory/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserStoryById(@PathParam("id") String id) {
