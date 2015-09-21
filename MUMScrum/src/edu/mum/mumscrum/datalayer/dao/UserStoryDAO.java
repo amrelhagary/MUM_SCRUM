@@ -6,7 +6,6 @@ import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
-import edu.mum.mumscrum.datalayer.model.Product;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 
 public class UserStoryDAO {

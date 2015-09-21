@@ -1,9 +1,10 @@
 package edu.mum.mumscrum.datalayer.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.jpa.JpaEntityManager;
@@ -17,6 +18,8 @@ public class MUMScrumDAO {
 	private static MUMScrumDAO mumScrumDAO;
 	private static final String persistenceUnitName = "DataLayer";
 	private static EntityManagerFactory factory;
+	private JpaEntityManager em;
+	private UnitOfWork uow;
 
 	private MUMScrumDAO() {
 		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -29,100 +32,109 @@ public class MUMScrumDAO {
 		return mumScrumDAO;
 	}
 
-	private void terminateConnection(JpaEntityManager em, UnitOfWork uow) {
+	private void instantiateConnection() {
+		em = (JpaEntityManager) factory.createEntityManager();
+		uow = em.getUnitOfWork();
+	}
+
+	private void terminateConnection() {
 		uow.commit();
 		uow.release();
 		em.close();
 	}
 
-	public <T> List<T> getAllObjects(Class<T> clazz) {
-		List<T> clones;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
-		clones = (List<T>) uow.readAllObjects(clazz);
-		terminateConnection(em, uow);
-		return clones;
-	}
-
-	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
-			Expression expression) {
-		List<T> clones;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
-		clones = (List<T>) uow.readAllObjects(clazz, expression);
-		terminateConnection(em, uow);
-		return clones;
-	}
-
-	public <T> List<T> getAllObjectsByExpression(Class<T> clazz,
-			Expression expression, SortingType sortingType, String columnName) {
-		List<T> clones;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
+	private ReadAllQuery createReadAllQuery(Class clazz, Expression expression,
+			SortingType sortingType, String columnName) {
 		ReadAllQuery query = new ReadAllQuery();
 		query.setReferenceClass(clazz);
+		query.setSelectionCriteria(expression);
 		if (sortingType.equals(SortingType.ASCENDING)) {
 			query.addAscendingOrdering(columnName);
 		} else {
 			query.addDescendingOrdering(columnName);
 		}
-		query.setSelectionCriteria(expression);
-		clones = (List<T>) uow.executeQuery(query);
-		terminateConnection(em, uow);
-		return clones;
+		return query;
 	}
 
-	public <T> T getObjectByExpression(Class<T> clazz, Expression expression) {
+	public <T> T getAllObjects(Class clazz) {
+		instantiateConnection();
 		T clone;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
+		clone = (T) uow.readAllObjects(clazz);
+		terminateConnection();
+		return clone;
+	}
+
+	public <T> T getAllObjectsByExpression(Class clazz, Expression expression) {
+		instantiateConnection();
+		T clone;
+		clone = (T) uow.readAllObjects(clazz, expression);
+		terminateConnection();
+		return clone;
+	}
+
+	public <T> T getAllObjectsByExpression(Class clazz, Expression expression,
+			SortingType sortingType, String columnName) {
+		instantiateConnection();
+		ReadAllQuery query = createReadAllQuery(clazz, expression, sortingType,
+				columnName);
+		T clone;
+		clone = (T) uow.executeQuery(query);
+		terminateConnection();
+		return clone;
+	}
+
+	public <T> T getObjectByExpression(Class clazz, Expression expression) {
+		instantiateConnection();
+		T clone;
 		clone = (T) uow.readObject(clazz, expression);
-		terminateConnection(em, uow);
+		terminateConnection();
 		return clone;
 	}
 
 	public <T> T addObject(T t) {
+		instantiateConnection();
 		T clone;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.registerObject(t);
-		terminateConnection(em, uow);
+		terminateConnection();
 		return clone;
 	}
 
 	public <T> T updateObject(T t) {
+		instantiateConnection();
 		T clone;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.deepMergeClone(t);
-		terminateConnection(em, uow);
+		terminateConnection();
 		return clone;
+	}
+
+	public int executeJpqlUpdate(String puName, String JPQLString) {
+		instantiateConnection();
+		int i;
+		Query query = em.createQuery(JPQLString);
+		i = query.executeUpdate();
+		terminateConnection();
+		return i;
 	}
 
 	public <T> T deleteObject(T t) {
+		instantiateConnection();
 		T clone;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
 		clone = (T) uow.deleteObject(t);
-		terminateConnection(em, uow);
+		terminateConnection();
 		return clone;
 	}
 
-	public <T> void deleteAllObjects(List<T> t) {
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
-		uow.deleteAllObjects(t);
-		terminateConnection(em, uow);
+	public <T> void deleteAllObjects(T objects) {
+		instantiateConnection();
+		uow.deleteAllObjects((Collection) objects);
+		terminateConnection();
 	}
 
-	public <T> List<T> deleteAllObjectsBasedOnExpression(Class<T> clazz,
+	public <T> T deleteAllObjectsBasedOnExpression(Class clazz,
 			Expression expression) {
-		List<T> clones;
-		JpaEntityManager em = (JpaEntityManager) factory.createEntityManager();
-		UnitOfWork uow = em.getUnitOfWork();
-		clones = uow.readAllObjects(clazz, expression);
-		uow.deleteAllObjects(clones);
-		terminateConnection(em, uow);
-		return clones;
+		T clone;
+		clone = getAllObjectsByExpression(clazz, expression);
+		deleteAllObjects(clone);
+		return clone;
 	}
 }
