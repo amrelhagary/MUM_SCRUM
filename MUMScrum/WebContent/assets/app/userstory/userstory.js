@@ -9,19 +9,23 @@ angular
 		$routeProvider
 			.when('/userstory', {
 				controller   : 'UserstoryListCtrl',
-				templateUrl  : 'userstory/views/userstory-list-view.html?' + Date.now()  
+				templateUrl  : 'userstory/views/userstory-list-view.html?' + Date.now(),
+				title : 'List User Stories'  
 			})
 			.when('/product/:id/userstory/add', {
 				controller   : 'UserstoryAddCtrl',
-				templateUrl  : 'userstory/views/userstory-add-view.html?' + Date.now()  
+				templateUrl  : 'userstory/views/userstory-add-view.html?' + Date.now(),
+				title: 'Add User Story'  
 			})
 			.when('/userstory/edit/:id',{
 				controller: 'UserstoryEditCtrl',
-				templateUrl: 'userstory/views/userstory-edit-view.html?'+ Date.now()
+				templateUrl: 'userstory/views/userstory-edit-view.html?'+ Date.now(),
+				title : 'Edit User Story'
 			})
 			.when('/product/:id/userstory',{
 				controller: 'UserstoryListCtrl',
-				templateUrl: 'userstory/views/userstory-list-view.html?' + Date.now()
+				templateUrl: 'userstory/views/userstory-list-view.html?' + Date.now(),
+				title : 'List User Stories'
 			})
 	}])
 	.controller('UserstoryAddCtrl', ['$scope','UserstoryFactory','ProductFactory','$http','$location','$routeParams','toaster',
