@@ -4,16 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
-
 public class MUMScrumUtil {
-	public static <T> JsonObject prepareJsonObjectResponse(T object) {
+	public static <T> JsonObject prepareJsonObjectResponse(
+			String responseStatus, String responseMessage, T responseObject) {
 		Gson gsonObject = new Gson();
-		JsonElement status = gsonObject
-				.toJsonTree(ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL);
-		JsonElement message = gsonObject
-				.toJsonTree(ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL);
-		JsonElement data = gsonObject.toJsonTree(object);
+		JsonElement status = gsonObject.toJsonTree(responseStatus);
+		JsonElement message = gsonObject.toJsonTree(responseMessage);
+		JsonElement data = gsonObject.toJsonTree(responseObject);
 
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.add("status", status);
