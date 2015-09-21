@@ -2,7 +2,7 @@
 <html ng-app="scrumApp">
     <head>
         <meta charset="UTF-8">
-        <title>MUM Scrum Tool</title>
+        <title ng-bind="'MUM Scrum Tool - ' + $root.title">MUM Scrum Tool</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="../theme/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -22,6 +22,7 @@
         <script src="../bower_components/angular-resource/angular-resource.js"></script>
         <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="../bower_components/angularjs-toaster/toaster.min.js"></script>
+        <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
         <script src="app.js"></script>
         <script src="filters.js"></script>
         <script src="authentication/auth.js"></script>
@@ -359,7 +360,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        {{ title }}
+                        {{ $root.title }}
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">

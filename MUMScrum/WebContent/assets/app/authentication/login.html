@@ -6,8 +6,12 @@
 				<div class="box-header">
 					<h3 class="box-title">Login</h3>
 				</div><!-- /.box-header -->
-
-				<form role="form" ng-submit="login">
+				
+				<div>
+					{{ message }}
+				</div>
+				
+				<form role="form" ng-submit="login()">
 					<div class="box-body">
 						<div class="form-group">
 							<label>Username</label>

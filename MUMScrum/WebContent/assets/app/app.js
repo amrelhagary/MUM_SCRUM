@@ -6,31 +6,33 @@ var scrumApp = angular.module('scrumApp', [
   'ngRoute',
   'ngResource',
   'ngAnimate',
+  'ngCookies',
   'toaster',
-  'scrumApp.auth',
+  'scrumApp.authentication',
   'scrumApp.employee',
   'scrumApp.product',
   'scrumApp.userstory',
   'scrumApp.release'
 ])
-.config(['$routeProvider',function($routeProvider){
-	// $routeProvider
-	// 	.otherwise({
-	// 		redirectTo: '/login'
-	// 	})
-}])
-.run(['$rootScope', '$location',
-    function ($rootScope, $location) {
+.run(['$rootScope', '$location','$cookies',
+    function ($rootScope, $location,$cookies) {
+
+        $rootScope.$on('$routeChangeSuccess',function(event,current,previous){
+            $rootScope.title = current.$$route.title;
+        });
+
+        $rootScope.globals = $cookies.get('globals') || {};
+        console.log($cookies.get('globals'))
         // keep user logged in after page refresh
-        // if ($rootScope.globals.currentUser) {
-        //     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-        // }
+        if (typeof $rootScope.globals.currentUser != "undefined") {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+        }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in
-            //if ($location.path() !== '/login' && $rootScope.globals.currentUser) {
-            // if ($location.path() !== '/login') {
-            //     $location.path('/login');
-            // }
+            //redirect to login page if not logged in
+            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                $location.path('/login');
+            } 
         });
+
     }]);

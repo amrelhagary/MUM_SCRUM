@@ -1,25 +1,27 @@
 'use strict';
 
 angular
-	.module('scrumApp.auth',[])
-	.config(['$routeProvider',function($routeProvider){
-		$routeProvider
-			.when('/login',{
-				controller: 'loginCtrl',
-				templateUrl: 'authentication/login.html'
-			})
-	}])
-	.controller('loginCtrl',['$scope','AuthService','$location',function($scope,AuthService,$location){
-		console.log('hello')
-		$scope.login = function(){
-			AuthService.login($scope.username,$scope.password,function(response){
-				if(response.success)
-				{
-					AuthService.setCredentials(response.username,response.user_role);
-					$location.path('/');
-				}else{
-					$scope.message = response.message;
-				}
-			});
-		}
-	}]);
+.module('scrumApp.authentication',[])
+.config(['$routeProvider',function($routeProvider){
+	$routeProvider
+	.when('/login',{
+		controller: 'LoginCtrl',
+		templateUrl: 'authentication/login.html?'+ Date.now()
+	})
+}])
+.controller('LoginCtrl',['$scope','AuthService','$location',function($scope,AuthService,$location){
+
+	AuthService.ClearCredentials();
+	$scope.login = function(){
+		AuthService.login($scope.username,$scope.password,function(response){
+			if(response.success)
+			{
+				console.log(response)
+				AuthService.setCredentials(response.username,response.password,response.role);
+				$location.path(response.route);
+			}else{
+				$scope.message = response.message;
+			}
+		});
+	}
+}]);
