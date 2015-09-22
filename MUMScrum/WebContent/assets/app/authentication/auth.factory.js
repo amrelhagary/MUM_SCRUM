@@ -5,52 +5,76 @@
 			function(Base64,$http,$rootScope,$timeout,$cookies){
 			var service = {};
 			service.login = function(username,password,callback){
-				console.log('user authenticated')
-				// $http
-				// 	.post('/login',{username: username,password: password})
-				// 	.success(function(response){
-				// 		callback(response);
-				// 	})
-				var roles = [
-					{ username: 'hradmin',password: 'hradmin', role: 'hradmin' , home_route: "/employee"},
-					{ username: 'developer',password: 'developer', role: 'developer', home_route: "/userstory"},
-					{ username: 'tester',password: 'tester', role: 'tester', home_route: "/userstory"},
-					{ username: 'scrummaster',password: 'scrummaster', role: 'scrummaster',home_route: "/sprint"},
-					{ username: 'productowner',password: 'productowner', role: 'productowner',home_route: "/project"}
-				];
 
-				$timeout(function () {
-					var response = { success : false };
-					for(var i = 0; i < roles.length ; i++)
-					{
-						if(roles[i].username === username && roles[i].password === password)
-						{
-							response = { success: true,username: username , role: roles[i].role,route: roles[i].home_route };
-							break;
-						}
-					}
+				$http
+					.post('http://localhost:8085/MUMScrum/API/AuthenticationControllerWS/authenticate',{username: username,password: password})
+					.success(function(response){
+                        console.log(response);
+                        var returnData = { success : false };
+                        if(response.status == 'ok')
+                        {
+                            returnData = {
+                                success: true,
+                                username: response.data.username,
+                                password: response.data.password,
+                                role: response.data.roleDesc,
+                                home_route: response.data.homeRoute
+                            };
+
+                        }else{
+                            returnData.message = 'Username or password is incorrect';
+                        }
+
+						callback(returnData);
+					});
 
 
-					if (!response.success) {
-						response.message = 'Username or password is incorrect';
-					}
-					callback(response);
-				}, 1000);
+                /**
+                * dummy authentication
+                */
+
+				// var roles = [
+				// 	{ username: 'hradmin',password: 'hradmin', role: 'hradmin' , home_route: "/employee"},
+				// 	{ username: 'developer',password: 'developer', role: 'developer', home_route: "/userstory"},
+				// 	{ username: 'tester',password: 'tester', role: 'tester', home_route: "/userstory"},
+				// 	{ username: 'scrummaster',password: 'scrummaster', role: 'scrummaster',home_route: "/sprint"},
+				// 	{ username: 'productowner',password: 'productowner', role: 'productowner',home_route: "/project"}
+				// ];
+
+				// $timeout(function () {
+				// 	var response = { success : false };
+				// 	for(var i = 0; i < roles.length ; i++)
+				// 	{
+				// 		if(roles[i].username === username && roles[i].password === password)
+				// 		{
+				// 			response = { success: true,username: username , role: roles[i].role,route: roles[i].home_route };
+				// 			break;
+				// 		}
+				// 	}
+
+
+				// 	if (!response.success) {
+				// 		response.message = 'Username or password is incorrect';
+				// 	}
+				// 	callback(response);
+				// }, 1000);
 
 			};
 
 			service.setCredentials = function(username,password,user_role){
-				
+				console.log(username,password)
 				var authdata = Base64.encode(username + ':' + password);
 				$rootScope.globals = {
 					currentUser: {
+                        authdata: authdata,
 						username: username,
-						user_role: user_role
+						user_role: user_role,
+                        is_auth: true
 					}
 				};
 
 				$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-            	$cookies.put('globals', $rootScope.globals);
+            	$cookies.putObject('globals', $rootScope.globals);
 			}
 
 	        service.ClearCredentials = function () {

@@ -8,6 +8,9 @@ angular
 		controller: 'LoginCtrl',
 		templateUrl: 'authentication/login.html?'+ Date.now()
 	})
+	.when('/logout',{
+		controller: 'LogoutCtrl'
+	})
 }])
 .controller('LoginCtrl',['$scope','AuthService','$location',function($scope,AuthService,$location){
 
@@ -16,12 +19,16 @@ angular
 		AuthService.login($scope.username,$scope.password,function(response){
 			if(response.success)
 			{
-				console.log(response)
 				AuthService.setCredentials(response.username,response.password,response.role);
-				$location.path(response.route);
+				$location.path(response.home_route);
 			}else{
 				$scope.message = response.message;
 			}
 		});
 	}
+}])
+.controller('LogoutCtrl', ['AuthService','$location', function(AuthService,$location){
+	console.log('logout')
+	AuthService.ClearCredentials();
+	$location.path('/');
 }]);

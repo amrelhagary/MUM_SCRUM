@@ -14,17 +14,17 @@ var scrumApp = angular.module('scrumApp', [
   'scrumApp.userstory',
   'scrumApp.release'
 ])
-.run(['$rootScope', '$location','$cookies',
-    function ($rootScope, $location,$cookies) {
+.run(['$http','$rootScope', '$location','$cookies',
+    function ($http,$rootScope, $location,$cookies) {
 
-        $rootScope.$on('$routeChangeSuccess',function(event,current,previous){
-            $rootScope.title = current.$$route.title;
-        });
+        // $rootScope.$on('$routeChangeSuccess',function(event,current,previous){
+        //     $rootScope.title = current.$$route.title;
+        // });
 
-        $rootScope.globals = $cookies.get('globals') || {};
-        console.log($cookies.get('globals'))
         // keep user logged in after page refresh
-        if (typeof $rootScope.globals.currentUser != "undefined") {
+        $rootScope.globals = $cookies.getObject('globals') || {};
+
+        if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
         }
 
