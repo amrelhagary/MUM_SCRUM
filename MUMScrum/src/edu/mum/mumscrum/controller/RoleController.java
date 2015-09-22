@@ -12,13 +12,15 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.databean.ResponseBean;
 import edu.mum.mumscrum.datalayer.model.Role;
 import edu.mum.mumscrum.service.RoleService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("RoleControllerWS")
-public class RoleController {
+public class RoleController extends MUMScrumController {
 	private RoleService roleService;
+	private ResponseBean responseObject;
 
 	public RoleController() {
 		roleService = new RoleService();
@@ -30,9 +32,13 @@ public class RoleController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllRoles() {
 		List<Role> rolesList = roleService.getAllRoles();
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rolesList);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(rolesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 }

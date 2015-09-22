@@ -21,7 +21,7 @@ import edu.mum.mumscrum.service.EmployeeService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("EmployeeControllerWS")
-public class EmployeeController {
+public class EmployeeController extends MUMScrumController {
 
 	private EmployeeService employeeService;
 
@@ -51,9 +51,13 @@ public class EmployeeController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllEmployees() {
 		List<Employee> employeesList = employeeService.getAllEmployees();
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, employeesList);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -62,10 +66,13 @@ public class EmployeeController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployeeById(@PathParam("id") String id) {
 		Employee employeeResultObject = employeeService.getEmployeeById(id);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				employeeResultObject);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeeResultObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -75,10 +82,13 @@ public class EmployeeController {
 	public Response getEmployeeByUsername(@PathParam("username") String username) {
 		Employee employeeResultObject = employeeService
 				.getEmployeeByUsername(username);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				employeeResultObject);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeeResultObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -88,10 +98,13 @@ public class EmployeeController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService.addEmployee(employee);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				employeeResultObject);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeeResultObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -102,10 +115,13 @@ public class EmployeeController {
 	public Response updateEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService
 				.updateEmployee(employee);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				employeeResultObject);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeeResultObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -114,9 +130,13 @@ public class EmployeeController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteEmployeeById(@PathParam("id") String id) {
 		List<Employee> employeesList = employeeService.deleteEmployeeById(id);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, employeesList);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -127,10 +147,14 @@ public class EmployeeController {
 	public Response deleteEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService
 				.deleteEmployee(employee);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				employeeResultObject);
+		responseObject
+				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject
+				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
+		responseObject.setData(employeeResultObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+
 		return Response.status(200).entity(result.toString()).build();
 	}
 
