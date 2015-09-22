@@ -62,13 +62,23 @@ angular
 	.controller('UserstoryListCtrl', ['$scope','UserstoryByProductId','UserstoryFactory','$routeParams','toaster',
 		function($scope,UserstoryByProductId,UserstoryFactory,$routeParams,toaster){
 			var productId = $routeParams.id;
-			$scope.productId = productId;
-	    	UserstoryByProductId.query({productId: productId },function(response){
+			if(productId)
+			{
+				$scope.productId = productId;
+		    	UserstoryByProductId.query({productId: productId },function(response){
+		    		if(response.status == 'ok')
+		    			$scope.userstories = response.data;
+		    		else
+		    			toaster.pop('error',"Error",response.message);
+		    	});
+			}else{
+				UserstoryFactory.query(function(response){
 	    		if(response.status == 'ok')
 	    			$scope.userstories = response.data;
 	    		else
 	    			toaster.pop('error',"Error",response.message);
-	    	});
+	    		});
+			}
 
 	    $scope.deleteUserstory = function(userstoryId,index){
 			UserstoryFactory.delete({id: userstoryId},function(response){
