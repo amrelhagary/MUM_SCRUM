@@ -28,6 +28,13 @@ public class EmployeeDAO {
 				new ExpressionBuilder(), SortingType.ASCENDING, "id");
 	}
 
+	public List<Employee> getAllScrumMasters(int id) {
+		Expression expression = new ExpressionBuilder().get("role")
+				.get("roleId").equal(id);
+		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
+				expression, SortingType.ASCENDING, "id");
+	}
+
 	public Employee getEmployeeById(String id) {
 		Expression expression = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.getObjectByExpression(Employee.class, expression);
@@ -56,5 +63,4 @@ public class EmployeeDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Employee.class,
 				expression);
 	}
-
 }
