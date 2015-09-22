@@ -65,7 +65,7 @@ angular
 		ProductFactory.get({id: productId},function(response){
 			$scope.product = response.data;
 		});
-		window.ProductFactory = ProductFactory;
+
 		$scope.updateProduct = function(){
 			ProductFactory.update($scope.product,function(response){
 				$location.path('/product');
