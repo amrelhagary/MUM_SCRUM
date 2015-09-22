@@ -36,9 +36,8 @@ public class ProductController {
 	public Response getAllProducts() {
 		List<Product> productsList = productService.getAllProducts();
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				productsList);
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, productsList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -48,8 +47,8 @@ public class ProductController {
 	public Response getProductById(@PathParam("id") String id) {
 		Product productResultObject = productService.getProductById(id);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
 				productResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
@@ -61,8 +60,8 @@ public class ProductController {
 	public Response addProduct(Product product) {
 		Product productResultObject = productService.addProduct(product);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
 				productResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
@@ -74,8 +73,8 @@ public class ProductController {
 	public Response updateProduct(Product product) {
 		Product productResultObject = productService.updateProduct(product);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
 				productResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
@@ -86,9 +85,8 @@ public class ProductController {
 	public Response deleteProductById(@PathParam("id") String id) {
 		List<Product> productsList = productService.deleteProductById(id);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				productsList);
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, productsList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -99,8 +97,8 @@ public class ProductController {
 	public Response deleteProduct(Product product) {
 		Product productResultObject = productService.deleteProduct(product);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
-				ConfigurationConstants.ResponseMessage.OPERATION_SUCCESSFUL,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
 				productResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}

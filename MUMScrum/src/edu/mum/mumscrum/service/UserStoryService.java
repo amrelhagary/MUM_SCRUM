@@ -3,7 +3,6 @@ package edu.mum.mumscrum.service;
 import java.util.List;
 
 import edu.mum.mumscrum.datalayer.dao.UserStoryDAO;
-import edu.mum.mumscrum.datalayer.model.Product;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 
 public class UserStoryService {
