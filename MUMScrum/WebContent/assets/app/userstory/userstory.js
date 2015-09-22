@@ -99,7 +99,7 @@ angular
 		})
 
 		$scope.updateUserstory = function(isValid){
-
+			console.log(isValid)
 			if(isValid)
 			{
 				UserstoryFactory.update($scope.userstory,function(response){
