@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.common.ConfigurationConstants;
@@ -22,7 +21,7 @@ import edu.mum.mumscrum.utility.MUMScrumUtil;
 
 @Path("ReleaseControllerWS")
 public class ReleaseController {
-
+	
 	private ReleaseService releaseservice;
 
 	public ReleaseController() {
@@ -57,8 +56,10 @@ public class ReleaseController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addRelease(Release release) {
 		Release rls = releaseservice.addRelease(release);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rls);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, 
+				rls);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -77,7 +78,7 @@ public class ReleaseController {
 	@Path("/release/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteReleaseById(@PathParam("id") String id) {
-		releaseservice.updateUS(id);
+		releaseservice.setReleasIdNull(id);
 		List<Release> releaselist = releaseservice.deleteReleaseById(id);
 		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(ConfigurationConstants.ResponseMessage.SUCCESS,
 				ConfigurationConstants.ResponseMessage.SUCCESS, releaselist);

@@ -57,7 +57,7 @@ public class ReleaseDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Release.class, exp);
 	}
 
-	public int updateUSReleasId(String id, String table1 , String table2) {
+	public int setReleasIdNull(String id, String table1 , String table2) {
 		String updateussql  = " update " +  table1 + "  set  Rels_id = null where  RELS_ID = " + id;
 		String updatesprsql = " update " +  table2 +  "  set Rels_id = null where  RELS_ID = " + id  ;
     	return mumScrumDAO.executeJpqlUpdate(updateussql , updatesprsql);
