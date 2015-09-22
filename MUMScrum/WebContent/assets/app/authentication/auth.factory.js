@@ -9,7 +9,6 @@
 				$http
 					.post('http://localhost:8085/MUMScrum/API/AuthenticationControllerWS/authenticate',{username: username,password: password})
 					.success(function(response){
-                        console.log(response);
                         var returnData = { success : false };
                         if(response.status == 'ok')
                         {
@@ -62,7 +61,6 @@
 			};
 
 			service.setCredentials = function(username,password,user_role){
-				console.log(username,password)
 				var authdata = Base64.encode(username + ':' + password);
 				$rootScope.globals = {
 					currentUser: {
