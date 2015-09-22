@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.databean.AuthenticationBean;
+import edu.mum.mumscrum.databean.ResponseBean;
 import edu.mum.mumscrum.service.AuthenticationService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
 
@@ -17,9 +18,11 @@ import edu.mum.mumscrum.utility.MUMScrumUtil;
 public class AuthenticationController {
 
 	private AuthenticationService authenticationService;
+	private ResponseBean responseObject;
 
 	public AuthenticationController() {
 		authenticationService = new AuthenticationService();
+		responseObject = new ResponseBean();
 	}
 
 	@POST
@@ -29,8 +32,11 @@ public class AuthenticationController {
 	public Response authenticate(AuthenticationBean authenticationObject) {
 		String authCredentials = authenticationService
 				.authenticate(authenticationObject);
-		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
-				authCredentials, authCredentials, authenticationObject);
+		responseObject.setStatus(authCredentials);
+		responseObject.setMessage(authCredentials);
+		responseObject.setData(authenticationObject);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 }

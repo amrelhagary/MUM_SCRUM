@@ -2,6 +2,8 @@ package edu.mum.mumscrum.databean;
 
 public class AuthenticationBean {
 
+	
+	//TODO: implement employee object
 	private String username;
 	private String password;
 	private String roleDesc;
