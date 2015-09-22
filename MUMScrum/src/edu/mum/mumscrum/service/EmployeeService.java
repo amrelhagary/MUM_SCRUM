@@ -20,6 +20,10 @@ public class EmployeeService {
 		return employeeDAO.getEmployeeById(id);
 	}
 
+	public Employee getEmployeeByUsername(String username) {
+		return employeeDAO.getEmployeeByUsername(username);
+	}
+
 	public Employee addEmployee(Employee employee) {
 		return employeeDAO.addEmployee(employee);
 	}

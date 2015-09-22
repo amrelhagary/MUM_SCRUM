@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonObject;
 
+import edu.mum.mumscrum.common.ConfigurationConstants;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 import edu.mum.mumscrum.service.UserStoryService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
@@ -34,8 +35,9 @@ public class UserStoryController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllUserStorys() {
 		List<Userstory> userStorysList = userStoryService.getAllUserStorys();
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStorysList);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, userStorysList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -46,7 +48,10 @@ public class UserStoryController {
 		List<Userstory> userStoriesList = userStoryService
 				.getUserStoriesByProductId(productId);
 		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoriesList);
+				.prepareJsonObjectResponse(
+						ConfigurationConstants.ResponseMessage.SUCCESS,
+						ConfigurationConstants.ResponseMessage.SUCCESS,
+						userStoriesList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -55,8 +60,10 @@ public class UserStoryController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserStoryById(@PathParam("id") String id) {
 		Userstory userStoryResultObject = userStoryService.getUserStoryById(id);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoryResultObject);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -67,8 +74,10 @@ public class UserStoryController {
 	public Response addUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.addUserStory(userstory);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoryResultObject);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -79,8 +88,10 @@ public class UserStoryController {
 	public Response updateUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.updateUserStory(userstory);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoryResultObject);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -90,8 +101,9 @@ public class UserStoryController {
 	public Response deleteUserStoryById(@PathParam("id") String id) {
 		List<Userstory> userStorysList = userStoryService
 				.deleteUserStoryById(id);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStorysList);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, userStorysList);
 		return Response.status(200).entity(result.toString()).build();
 	}
 
@@ -102,8 +114,10 @@ public class UserStoryController {
 	public Response deleteUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.deleteUserStory(userstory);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(userStoryResultObject);
+		JsonObject result = MUMScrumUtil.prepareJsonObjectResponse(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		return Response.status(200).entity(result.toString()).build();
 	}
 

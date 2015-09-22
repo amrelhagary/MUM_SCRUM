@@ -33,6 +33,12 @@ public class EmployeeDAO {
 		return mumScrumDAO.getObjectByExpression(Employee.class, expression);
 	}
 
+	public Employee getEmployeeByUsername(String username) {
+		Expression expression = new ExpressionBuilder().get("username").equal(
+				username);
+		return mumScrumDAO.getObjectByExpression(Employee.class, expression);
+	}
+
 	public Employee addEmployee(Employee employee) {
 		return mumScrumDAO.addObject(employee);
 	}

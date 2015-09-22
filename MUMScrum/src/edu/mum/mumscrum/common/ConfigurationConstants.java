@@ -5,8 +5,9 @@ public class ConfigurationConstants {
 		public final static String ORACLE_DRIVE_CLASS_NOT_FOUND_EXCEPTION = "Class not found exception - Oracle Drive";
 		public final static String SQL_EXCEPTION = "SQL Exception";
 		public final static String JSON_EXCEPTION = "JSON Exception ";
-		public final static String OPERATION_SUCCESSFUL = "ok";
-		public final static String OPERATION_FAILED = "failed";
+		public final static String SUCCESS = "ok";
+		public final static String FAIL = "fail";
+		public final static String AUTHENTICATION_FAILED = "Authentication Failed";
 	}
 
 	public enum SortingType {
@@ -35,6 +36,49 @@ public class ConfigurationConstants {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+	}
+
+	public enum RoleTypeHomeRoute {
+
+		PRODUCT_OWNER(1, "Product Owner", "/project"), SCRUM_MASTER(2,
+				"Scrum Master", "/sprint"), DEVELOPER(3, "Developer",
+				"/userstory"), TESTER(4, "Tester", "/userstory"), HR_ADMIN(5,
+				"HR Admin", "/employee");
+
+		private int id;
+		private String name;
+		private String homeRoute;
+
+		private RoleTypeHomeRoute(int id, String name, String homeRoute) {
+			this.name = name;
+			this.id = id;
+			this.homeRoute = homeRoute;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getHomeRoute() {
+			return homeRoute;
+		}
+
+		public void setHomeRoute(String homeRoute) {
+			this.homeRoute = homeRoute;
 		}
 
 	}
