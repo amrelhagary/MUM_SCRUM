@@ -9,7 +9,8 @@ angular
 		templateUrl: 'authentication/login.html?'+ Date.now()
 	})
 	.when('/logout',{
-		controller: 'LogoutCtrl'
+		controller: 'LogoutCtrl',
+		template: " "
 	})
 }])
 .controller('LoginCtrl',['$scope','AuthService','$location',function($scope,AuthService,$location){

@@ -27,12 +27,12 @@ scrumApp
 	.directive('developerMenu',function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'partials/developer_menu.html'
+			templateUrl: 'partials/developer_side_menu.html'
 		};
 	})
 	.directive('testerMenu',function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'partials/tester_menu.html'
+			templateUrl: 'partials/tester_side_menu.html'
 		};
 	})
