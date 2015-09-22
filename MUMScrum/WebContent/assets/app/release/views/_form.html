@@ -1,0 +1,24 @@
+<div class="box-body">
+	<div class="form-group" ng-class="{ 'has-error' : releaseForm.relsName.$invalid && releaseForm.$submitted }">
+		<label>Title</label>
+		<input class="form-control" type="text" name="relsName" ng-model="release.relsName"/>
+	</div>
+
+	<div class="form-group" ng-class="{ 'has-error' : releaseForm.relsDesc.$invalid && releaseForm.$submitted }">
+		<label>Description</label>
+		<input class="form-control" type="text" name="relsDesc" ng-model="release.relsDesc" />
+	</div>
+
+	<div class="form-group">
+		<label>Release Date(YYYY-MM-DD)</label>
+		<input class="form-control" type="text" name="relsDate" ng-model="release.relsDate" />
+	</div>
+
+	<div>
+		<label>Product</label>
+		<product-list></product-list>
+	</div>
+</div>
+
+<div class="box-footer">
+	<button type="submit" class="btn btn-primary">Submit</button>
