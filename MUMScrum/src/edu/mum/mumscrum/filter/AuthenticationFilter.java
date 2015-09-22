@@ -25,7 +25,13 @@ public class AuthenticationFilter implements Filter {
 			String authCredentials = httpServletRequest
 					.getHeader(AUTHENTICATION_HEADER);
 
-			// better injected
+			String path = httpServletRequest.getRequestURI();
+
+			if (path.endsWith("/authenticate")) {
+				filter.doFilter(request, response);
+				return;
+			}
+
 			AuthenticationService authenticationService = new AuthenticationService();
 
 			boolean authenticationStatus = authenticationService
