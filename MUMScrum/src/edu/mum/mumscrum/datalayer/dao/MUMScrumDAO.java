@@ -123,7 +123,7 @@ public class MUMScrumDAO {
 		
 		} finally {
 			
-			System.out.println(" terminate Connection finally ");
+			System.out.println(" terminate Connection ");
 			terminateConnection();
 		}
 	}

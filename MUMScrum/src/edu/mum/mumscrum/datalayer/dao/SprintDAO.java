@@ -33,5 +33,30 @@ public class SprintDAO {
 		Expression exp = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.getObjectByExpression(Sprint.class, exp); 
 	}
+
+	public Sprint addSprint(Sprint sprint) {
+		return mumScrumDAO.addObject(sprint);
+	}
+
+	public Sprint updateSprint(Sprint sprint) {
+		return mumScrumDAO.updateObject(sprint);
+	}
+
+	public Sprint deleteSprint(Sprint sprint) {
+		return mumScrumDAO.deleteObject(sprint);
+	}
+
+	public List<Sprint> deleteSprintById(String id) {
+		Expression exp = new ExpressionBuilder().get("id").equal(id);
+		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Sprint.class, exp);
+	}
+
+	public int setReleasIdNull(String id, String table1, String table2) {
+		String updateussql  = " update " +  table1 + "   set  spr_id = null where  spr_ID = " + id ;
+		String updatesprsql = " update " +  table2 +  "  set  spr_id = null where  spr_ID = " + id ;
+    	return mumScrumDAO.executeJpqlUpdate(updateussql , updatesprsql);
+	}
+	
+	
 	
 }

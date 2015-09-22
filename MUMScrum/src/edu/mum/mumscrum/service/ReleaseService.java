@@ -44,8 +44,8 @@ public class ReleaseService {
 		return releasedao.addRelease(release);
 	}
 	
-	public int updateUS(String id )
+	public int setReleasIdNull(String id )
 	{
-		return  releasedao.updateUSReleasId(id , " userstory " , " sprint ");
+		return  releasedao.setReleasIdNull(id , " userstory " , " sprint ");
 	}
 }//ReleaseService
