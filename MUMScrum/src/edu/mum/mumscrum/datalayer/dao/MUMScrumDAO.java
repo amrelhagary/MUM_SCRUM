@@ -1,14 +1,12 @@
 package edu.mum.mumscrum.datalayer.dao;
 
 import java.util.Collection;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.queries.ReadAllQuery;
+import org.eclipse.persistence.queries.SQLCall;
 import org.eclipse.persistence.sessions.UnitOfWork;
 
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
@@ -20,6 +18,7 @@ public class MUMScrumDAO {
 	private static EntityManagerFactory factory;
 	private JpaEntityManager em;
 	private UnitOfWork uow;
+
 
 	private MUMScrumDAO() {
 		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -34,17 +33,18 @@ public class MUMScrumDAO {
 
 	private void instantiateConnection() {
 		em = (JpaEntityManager) factory.createEntityManager();
+		em.getTransaction().begin();
 		uow = em.getUnitOfWork();
 	}
 
 	private void terminateConnection() {
-		uow.commit();
+		em.getTransaction().commit();
 		uow.release();
 		em.close();
 	}
 
-	private ReadAllQuery createReadAllQuery(Class clazz, Expression expression,
-			SortingType sortingType, String columnName) {
+	private ReadAllQuery createReadAllQuery(Class clazz, Expression expression, SortingType sortingType,
+			String columnName) {
 		ReadAllQuery query = new ReadAllQuery();
 		query.setReferenceClass(clazz);
 		query.setSelectionCriteria(expression);
@@ -72,11 +72,11 @@ public class MUMScrumDAO {
 		return clone;
 	}
 
-	public <T> T getAllObjectsByExpression(Class clazz, Expression expression,
-			SortingType sortingType, String columnName) {
+	public <T> T getAllObjectsByExpression(Class clazz, Expression expression, SortingType sortingType,
+			String columnName) {
 		instantiateConnection();
-		ReadAllQuery query = createReadAllQuery(clazz, expression, sortingType,
-				columnName);
+		ReadAllQuery query = createReadAllQuery(clazz, expression, sortingType, columnName);
+
 		T clone;
 		clone = (T) uow.executeQuery(query);
 		terminateConnection();
@@ -85,6 +85,7 @@ public class MUMScrumDAO {
 
 	public <T> T getObjectByExpression(Class clazz, Expression expression) {
 		instantiateConnection();
+
 		T clone;
 		clone = (T) uow.readObject(clazz, expression);
 		terminateConnection();
@@ -107,13 +108,24 @@ public class MUMScrumDAO {
 		return clone;
 	}
 
-	public int executeJpqlUpdate(String puName, String JPQLString) {
+	public int executeJpqlUpdate(String updatequery, String updatequery1) {
 		instantiateConnection();
-		int i;
-		Query query = em.createQuery(JPQLString);
-		i = query.executeUpdate();
-		terminateConnection();
-		return i;
+		try {
+			
+			uow.executeNonSelectingCall(new SQLCall(updatequery));
+			uow.executeNonSelectingCall(new SQLCall(updatequery1));
+			return 1;// Success 
+			
+		} catch (Exception ex) {
+			
+			System.out.println(" MumScrumDao.executeJpqlUpdate catch msg " + ex.getMessage());
+			return -1;// fail
+		
+		} finally {
+			
+			System.out.println(" terminate Connection finally ");
+			terminateConnection();
+		}
 	}
 
 	public <T> T deleteObject(T t) {
@@ -130,8 +142,7 @@ public class MUMScrumDAO {
 		terminateConnection();
 	}
 
-	public <T> T deleteAllObjectsBasedOnExpression(Class clazz,
-			Expression expression) {
+	public <T> T deleteAllObjectsBasedOnExpression(Class clazz, Expression expression) {
 		T clone;
 		clone = getAllObjectsByExpression(clazz, expression);
 		deleteAllObjects(clone);

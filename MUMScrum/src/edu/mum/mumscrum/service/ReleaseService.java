@@ -1,6 +1,7 @@
 package edu.mum.mumscrum.service;
 import java.util.List;
 import edu.mum.mumscrum.datalayer.dao.ReleaseDAO;
+import edu.mum.mumscrum.datalayer.model.Employee;
 import edu.mum.mumscrum.datalayer.model.Release;
 
 public class ReleaseService {
@@ -18,6 +19,7 @@ public class ReleaseService {
 	
 	public Release getReleaseById(String id)
 	{
+
 		return releasedao.getReleaseById(id);
 		
 	}
@@ -28,7 +30,8 @@ public class ReleaseService {
 	}
 	
 	public Release deleteRelease(Release release)
-	{
+	{	
+		
 		return releasedao.deleteRelease(release);
 	}
 	
@@ -36,5 +39,13 @@ public class ReleaseService {
 	{
 		return releasedao.deleteReleaseById(id);
 	}
+	public Release addRelease(Release release) {
+		
+		return releasedao.addRelease(release);
+	}
 	
+	public int updateUS(String id )
+	{
+		return  releasedao.updateUSReleasId(id , " userstory " , " sprint ");
+	}
 }//ReleaseService

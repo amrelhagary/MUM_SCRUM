@@ -47,6 +47,19 @@ public class Release implements Serializable {
 	@JoinColumn(name = "PRD_ID")
 	private Product product;
 
+	// bi-directional many-to-one association to Product
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "EMP_ID")
+	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public Release() {
 	}
 
@@ -88,6 +101,12 @@ public class Release implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return " id=" + id + ", relsDate=" + relsDate + ", relsDesc=" + relsDesc + ", relsName=" + relsName;
+		// + ", product=" + product + "]";
 	}
 
 }

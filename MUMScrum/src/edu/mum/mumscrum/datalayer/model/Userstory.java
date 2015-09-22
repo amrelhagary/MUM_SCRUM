@@ -2,6 +2,8 @@ package edu.mum.mumscrum.datalayer.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Access;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+
+import org.eclipse.persistence.jpa.config.Cascade;
 
 /**
  * The persistent class for the USERSTORY database table.
@@ -46,18 +50,25 @@ public class Userstory implements Serializable {
 	@JoinColumn(name = "PRD_ID")
 	private Product product;
 
+	@Override
+	public String toString() {
+		return "Userstory [id=" + id + ", estTimeEff=" + estTimeEff + ", usDesc=" + usDesc + ", usName=" + usName
+				+ ", employee=" + employee + ", product=" + product + ", release=" + release + ", severity=" + severity
+				+ ", sprint=" + sprint + "]";
+	}
+
 	// bi-directional many-to-one association to Release
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne( cascade= CascadeType.PERSIST , fetch = FetchType.LAZY)
 	@JoinColumn(name = "RELS_ID")
 	private Release release;
-
+	
 	// bi-directional many-to-one association to Severity
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SEV_ID")
 	private Severity severity;
 
 	// bi-directional many-to-one association to Sprint
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "SPR_ID")
 	private Sprint sprint;
 
@@ -112,8 +123,8 @@ public class Userstory implements Serializable {
 		this.product = product;
 	}
 
-	public Release getRelease() {
-		return this.release;
+	public long getReleaseid() {
+		return this.release.getId();
 	}
 
 	public void setRelease(Release release) {
