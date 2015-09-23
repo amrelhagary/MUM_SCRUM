@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.persistence.expressions.Expression;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.RoleTypeHomeRoute;
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
@@ -28,11 +29,20 @@ public class EmployeeDAO {
 				new ExpressionBuilder(), SortingType.ASCENDING, "id");
 	}
 
-	public List<Employee> getAllScrumMasters(int id) {
+	public List<Employee> getAllScrumMasters() {
 		Expression expression = new ExpressionBuilder().get("role")
-				.get("roleId").equal(id);
+				.get("roleId").equal(RoleTypeHomeRoute.SCRUM_MASTER.getId());
 		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
-				expression, SortingType.ASCENDING, "id");
+				expression, SortingType.ASCENDING, "firstName");
+	}
+
+	public List<Employee> getAllUserStoryAssignees() {
+		Expression expression = new ExpressionBuilder().get("role")
+				.get("roleId").equal(RoleTypeHomeRoute.DEVELOPER.getId());
+		expression = expression.or(new ExpressionBuilder().get("role")
+				.get("roleId").equal(RoleTypeHomeRoute.TESTER.getId()));
+		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
+				expression, SortingType.ASCENDING, "firstName");
 	}
 
 	public Employee getEmployeeById(String id) {

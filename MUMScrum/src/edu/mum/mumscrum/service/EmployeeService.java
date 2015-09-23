@@ -2,7 +2,6 @@ package edu.mum.mumscrum.service;
 
 import java.util.List;
 
-import edu.mum.mumscrum.common.ConfigurationConstants.RoleTypeHomeRoute;
 import edu.mum.mumscrum.datalayer.dao.EmployeeDAO;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
@@ -18,8 +17,11 @@ public class EmployeeService {
 	}
 
 	public List<Employee> getAllScrumMasters() {
-		return employeeDAO.getAllScrumMasters(RoleTypeHomeRoute.SCRUM_MASTER
-				.getId());
+		return employeeDAO.getAllScrumMasters();
+	}
+
+	public List<Employee> getAllUserStoryAssignees() {
+		return employeeDAO.getAllUserStoryAssignees();
 	}
 
 	public Employee getEmployeeById(String id) {

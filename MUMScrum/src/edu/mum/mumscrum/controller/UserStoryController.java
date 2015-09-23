@@ -33,7 +33,6 @@ public class UserStoryController extends MUMScrumController {
 	@GET
 	@Path("/userstory")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllUserStorys() {
 		List<Userstory> userStoriesList = userStoryService.getAllUserStorys();
 		responseObject = new ResponseDataBean(

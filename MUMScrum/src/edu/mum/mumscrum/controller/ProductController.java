@@ -33,7 +33,6 @@ public class ProductController extends MUMScrumController {
 	@GET
 	@Path("/product")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllProducts() {
 		List<Product> productsList = productService.getAllProducts();
 		responseObject = new ResponseDataBean(

@@ -49,7 +49,6 @@ public class EmployeeController extends MUMScrumController {
 	@GET
 	@Path("/employee")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllEmployees() {
 		List<Employee> employeesList = employeeService.getAllEmployees();
 		responseObject = new ResponseDataBean(
@@ -63,13 +62,25 @@ public class EmployeeController extends MUMScrumController {
 	@GET
 	@Path("/employee/srcummaster")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllScrumMasters() {
 		List<Employee> scrumMastersList = employeeService.getAllScrumMasters();
 		responseObject = new ResponseDataBean(
 				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, scrumMastersList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(200).entity(result.toString()).build();
+	}
+
+	@GET
+	@Path("/employee/assignee")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUserStoryAssignees() {
+		List<Employee> assigneesList = employeeService
+				.getAllUserStoryAssignees();
+		responseObject = new ResponseDataBean(
 				ConfigurationConstants.ErrorMessage.SUCCESS,
-				scrumMastersList);
+				ConfigurationConstants.ErrorMessage.SUCCESS, assigneesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

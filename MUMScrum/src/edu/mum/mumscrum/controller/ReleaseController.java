@@ -47,7 +47,6 @@ public class ReleaseController extends MUMScrumController {
 	@GET
 	@Path("/release/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getReleaseById(@PathParam("id") String id) {
 		Release release = releaseservice.getReleaseById(id);
 		responseObject = new ResponseDataBean(
