@@ -12,7 +12,7 @@ angular
 				templateUrl  : 'userstory/views/userstory-list-view.html?' + Date.now(),
 				title : 'List User Stories'  
 			})
-			.when('/product/:id/userstory/add', {
+			.when('/userstory/add', {
 				controller   : 'UserstoryAddCtrl',
 				templateUrl  : 'userstory/views/userstory-add-view.html?' + Date.now(),
 				title: 'Add User Story'  
@@ -37,25 +37,17 @@ angular
 
 				if(isValid)
 				{
-					//get product object from server side
-					var product = ProductFactory.get({id: $scope.productId});
-
-					// use promise concept for saving user story
-					product.$promise.then(function(result){
-						$scope.userstory.product = result.data;
-
-						UserstoryFactory.save($scope.userstory,function(response){
-							console.log($scope.userstory.product)
-							console.log(response)
-							if(response.status == 'ok')
-							{
-								$location.path('/product/'+$scope.productId+'/userstory');
-								toaster.pop('success',"Add Userstory","Userstory Record Added Successfully");
-							}else{
-								toaster.pop('error',"Error",response.message);
-							}
-						});
+					UserstoryFactory.save($scope.userstory,function(response){
+						if(response.status == 'ok')
+						{
+							$location.path('/userstory');
+							toaster.pop('success',"Add Userstory","Userstory Record Added Successfully");
+						}else{
+							toaster.pop('error',"Error",response.message);
+						}
 					});
+
+
 				}
 			}
   	}])
@@ -99,7 +91,6 @@ angular
 		})
 
 		$scope.updateUserstory = function(isValid){
-
 			if(isValid)
 			{
 				UserstoryFactory.update($scope.userstory,function(response){

@@ -36,3 +36,20 @@ scrumApp
 			templateUrl: 'partials/tester_side_menu.html'
 		};
 	})
+	.directive('productList',['ProductFactory',function(ProductFactory){
+		return {
+			restrict: 'E',
+			scope: {
+				myDirectiveVar: "="
+			},
+			templateUrl: 'partials/_product_list.html?'+Date.now(),
+			link: function(scope,element,attrs){
+				ProductFactory.get(function(response){
+					if(response.status == 'ok')
+						scope.products = response.data;
+					else
+						console.log("Error fetch product list")
+				})
+			}
+		}
+	}])

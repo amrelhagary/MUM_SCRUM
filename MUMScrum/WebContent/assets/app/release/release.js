@@ -25,8 +25,9 @@ angular
 		function($scope,ReleaseFactory,$http,$location,toaster){
 			$scope.addRelease = function(isValid)
 			{
-				if(isValid)
-				{
+				console.log(isValid)
+				// if(isValid)
+				// {
 					ReleaseFactory.save($scope.release,function(response){
 						if(response.status == 'ok')
 						{
@@ -36,7 +37,7 @@ angular
 							toaster.pop('error',"Error",response.message);
 						}
 					});
-				}
+				// }
 			}
   	}])
 	.controller('ReleaseListCtrl', ['$scope','ReleaseFactory','$routeParams','toaster',
@@ -60,13 +61,14 @@ angular
 			})
 		}
   	}])
-	.controller('ReleaseEditCtrl',['$scope','ReleaseFactory','$routeParams','$location','toaster',function($scope,ReleaseFactory,$routeParams,$location,toaster){
+	.controller('ReleaseEditCtrl',['$scope','ReleaseFactory','EmployeeFactory','$routeParams','$location','toaster',function($scope,ReleaseFactory,EmployeeFactory,$routeParams,$location,toaster){
 		var releaseId = $routeParams.id;
 		ReleaseFactory.get({id: releaseId},function(response){
 			$scope.release = response.data;
 		});
 
-		$scope.updateRelease = function(){
+		$scope.updateRelease = function(isValid){
+			// update release
 			ReleaseFactory.update($scope.release,function(response){
 				if(response.status == 'ok')
 				{
@@ -75,7 +77,7 @@ angular
 				}else{
 					toaster.pop('error',"Error release",response.message);
 				}
-			})
+			});
 		}
 	}])
 	.directive('releaseForm',[function(){
@@ -84,17 +86,25 @@ angular
 			templateUrl: 'release/views/_form.html'
 		}
 	}])
-	.directive('productList',['ProductFactory',function(ProductFactory){
+	.directive('scrumMasterList',['ScrumMaster',function(ScrumMaster){
 		return {
 			restrict: 'E',
-			templateUrl: 'release/views/_product_list.html?'+Date.now(),
+			templateUrl: 'release/views/_scrum_master_list.html?'+Date.now(),
 			link: function(scope,element,attrs){
-				ProductFactory.get(function(response){
+				ScrumMaster.get(function(response){
 					if(response.status == 'ok')
-						scope.products = response.data;
+					{
+						if(Array.isArray(response.data) === false)
+						{
+							scope.employee = new Array();
+							scope.employee.push(response.data);
+						}
+						else
+							scope.employee = response.data;
+					}
 					else
-						console.log("Error fetch product list")
+						console.log("Error fetch Scrum Master list")
 				})
 			}
 		}
-	}]);
+	}])

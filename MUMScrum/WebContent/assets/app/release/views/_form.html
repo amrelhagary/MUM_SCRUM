@@ -1,12 +1,12 @@
 <div class="box-body">
 	<div class="form-group" ng-class="{ 'has-error' : releaseForm.relsName.$invalid && releaseForm.$submitted }">
 		<label>Title</label>
-		<input class="form-control" type="text" name="relsName" ng-model="release.relsName"/>
+		<input class="form-control" type="text" name="relsName" ng-model="release.relsName" required />
 	</div>
 
 	<div class="form-group" ng-class="{ 'has-error' : releaseForm.relsDesc.$invalid && releaseForm.$submitted }">
 		<label>Description</label>
-		<input class="form-control" type="text" name="relsDesc" ng-model="release.relsDesc" />
+		<input class="form-control" type="text" name="relsDesc" ng-model="release.relsDesc" required/>
 	</div>
 
 	<div class="form-group">
@@ -16,8 +16,14 @@
 
 	<div>
 		<label>Product</label>
-		<product-list></product-list>
+		<product-list my-directive-var="release.product"></product-list>
 	</div>
+
+	<div>
+		<label>Scrum Master</label>
+		<scrum-master-list></scrum-master-list>
+	</div>
+
 </div>
 
 <div class="box-footer">
