@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonObject;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.databean.ResponseDataBean;
 import edu.mum.mumscrum.datalayer.model.Release;
 import edu.mum.mumscrum.service.ReleaseService;
@@ -36,9 +36,8 @@ public class ReleaseController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllReleases() {
 		List<Release> releaselist = releaseservice.getAllReleases();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, releaselist);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, releaselist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -49,9 +48,8 @@ public class ReleaseController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getReleaseById(@PathParam("id") String id) {
 		Release release = releaseservice.getReleaseById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, release);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, release);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -63,9 +61,8 @@ public class ReleaseController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addRelease(Release release) {
 		Release rls = releaseservice.addRelease(release);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -77,9 +74,8 @@ public class ReleaseController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateRelease(Release release) {
 		Release rls = releaseservice.updateRelease(release);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -91,9 +87,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response deleteReleaseById(@PathParam("id") String id) {
 		releaseservice.setReleasIdNull(id);
 		List<Release> releaselist = releaseservice.deleteReleaseById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, releaselist);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, releaselist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -105,9 +100,8 @@ public class ReleaseController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteAllreleases(Release release) {
 		Release rls = releaseservice.deleteRelease(release);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

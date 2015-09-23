@@ -82,6 +82,10 @@ public class ConfigurationConstants {
 		public void setHomeRoute(String homeRoute) {
 			this.homeRoute = homeRoute;
 		}
+	}
 
+	public interface ProgressRecordStateFlag {
+		public final static long START = 0;
+		public final static long STOP = 1;
 	}
 }

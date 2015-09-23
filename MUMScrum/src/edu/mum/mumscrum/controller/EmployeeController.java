@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonObject;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.databean.ResponseDataBean;
 import edu.mum.mumscrum.datalayer.model.Employee;
 import edu.mum.mumscrum.service.EmployeeService;
@@ -51,9 +51,8 @@ public class EmployeeController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllEmployees() {
 		List<Employee> employeesList = employeeService.getAllEmployees();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, employeesList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -64,9 +63,8 @@ public class EmployeeController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllScrumMasters() {
 		List<Employee> scrumMastersList = employeeService.getAllScrumMasters();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, scrumMastersList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, scrumMastersList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -78,9 +76,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response getAllUserStoryAssignees() {
 		List<Employee> assigneesList = employeeService
 				.getAllUserStoryAssignees();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, assigneesList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, assigneesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -91,10 +88,8 @@ public class EmployeeController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployeeById(@PathParam("id") String id) {
 		Employee employeeResultObject = employeeService.getEmployeeById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				employeeResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -106,10 +101,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response getEmployeeByUsername(@PathParam("username") String username) {
 		Employee employeeResultObject = employeeService
 				.getEmployeeByUsername(username);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				employeeResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -121,10 +114,8 @@ public class EmployeeController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService.addEmployee(employee);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				employeeResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -137,10 +128,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response updateEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService
 				.updateEmployee(employee);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				employeeResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -155,9 +144,8 @@ public class EmployeeController extends MUMScrumController {
 		 */
 		employeeService.setEmpIdNull(id);
 		List<Employee> employeesList = employeeService.deleteEmployeeById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, employeesList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -171,10 +159,8 @@ public class EmployeeController extends MUMScrumController {
 
 		Employee employeeResultObject = employeeService
 				.deleteEmployee(employee);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				employeeResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 

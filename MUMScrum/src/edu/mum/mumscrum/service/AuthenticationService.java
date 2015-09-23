@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.StringTokenizer;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
+import edu.mum.mumscrum.common.ConfigurationConstants.RoleTypeHomeRoute;
 import edu.mum.mumscrum.databean.AuthenticationDataBean;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
@@ -16,59 +17,49 @@ public class AuthenticationService {
 	}
 
 	public String authenticate(AuthenticationDataBean authenticationObject) {
-		if (authenticationObject.getUsername() == null
-				|| authenticationObject.getPassword() == null) {
-			return ConfigurationConstants.ErrorMessage.USERNAME_OR_PASSWORD_VALUE_IS_REQUIRED;
+		if (authenticationObject.getEmployee().getUsername() == null
+				|| authenticationObject.getEmployee().getPassword() == null) {
+			return ErrorMessage.USERNAME_OR_PASSWORD_VALUE_IS_REQUIRED;
 		}
 
 		Employee employee = employeeService
-				.getEmployeeByUsername(authenticationObject.getUsername());
+				.getEmployeeByUsername(authenticationObject.getEmployee()
+						.getUsername());
 
 		if (employee != null) {
 			if (!employee.getPassword().equals(
-					authenticationObject.getPassword())) {
-				return ConfigurationConstants.ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
+					authenticationObject.getEmployee().getPassword())) {
+				return ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
 			}
+			authenticationObject.setEmployee(employee);
+			String homeRoute = getAuthObjHomeRoute(employee);
+			// if (homeRoute == null) {
+			// return ErrorMessage.AUTHENTICATION_FAILED;
+			// }
+			authenticationObject.setHomeRoute(homeRoute);
 		} else {
-			return ConfigurationConstants.ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
+			return ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
 		}
 
-		authenticationObject.setRoleDesc(employee.getRole().getRoleDesc());
-		String homeRoute = getAuthObjHomeRoute(employee);
-		// if (homeRoute == null) {
-		// return ConfigurationConstants.ErrorMessage.AUTHENTICATION_FAILED;
-		// }
-		authenticationObject.setHomeRoute(homeRoute);
-
-		return ConfigurationConstants.ErrorMessage.SUCCESS;
+		return ErrorMessage.SUCCESS;
 	}
 
 	private String getAuthObjHomeRoute(Employee employee) {
 		String roleDesc = employee.getRole().getRoleDesc();
-		if (ConfigurationConstants.RoleTypeHomeRoute.PRODUCT_OWNER.getName()
-				.equals(roleDesc)) {
-			return ConfigurationConstants.RoleTypeHomeRoute.PRODUCT_OWNER
-					.getHomeRoute();
+		if (RoleTypeHomeRoute.PRODUCT_OWNER.getName().equals(roleDesc)) {
+			return RoleTypeHomeRoute.PRODUCT_OWNER.getHomeRoute();
 		}
-		if (ConfigurationConstants.RoleTypeHomeRoute.SCRUM_MASTER.getName()
-				.equals(roleDesc)) {
-			return ConfigurationConstants.RoleTypeHomeRoute.SCRUM_MASTER
-					.getHomeRoute();
+		if (RoleTypeHomeRoute.SCRUM_MASTER.getName().equals(roleDesc)) {
+			return RoleTypeHomeRoute.SCRUM_MASTER.getHomeRoute();
 		}
-		if (ConfigurationConstants.RoleTypeHomeRoute.DEVELOPER.getName()
-				.equals(roleDesc)) {
-			return ConfigurationConstants.RoleTypeHomeRoute.DEVELOPER
-					.getHomeRoute();
+		if (RoleTypeHomeRoute.DEVELOPER.getName().equals(roleDesc)) {
+			return RoleTypeHomeRoute.DEVELOPER.getHomeRoute();
 		}
-		if (ConfigurationConstants.RoleTypeHomeRoute.TESTER.getName().equals(
-				roleDesc)) {
-			return ConfigurationConstants.RoleTypeHomeRoute.TESTER
-					.getHomeRoute();
+		if (RoleTypeHomeRoute.TESTER.getName().equals(roleDesc)) {
+			return RoleTypeHomeRoute.TESTER.getHomeRoute();
 		}
-		if (ConfigurationConstants.RoleTypeHomeRoute.HR_ADMIN.getName().equals(
-				roleDesc)) {
-			return ConfigurationConstants.RoleTypeHomeRoute.HR_ADMIN
-					.getHomeRoute();
+		if (RoleTypeHomeRoute.HR_ADMIN.getName().equals(roleDesc)) {
+			return RoleTypeHomeRoute.HR_ADMIN.getHomeRoute();
 		}
 		return null;
 	}

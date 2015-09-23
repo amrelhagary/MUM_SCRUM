@@ -1,5 +1,12 @@
 package edu.mum.mumscrum.controller;
 
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -8,19 +15,11 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonObject;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.databean.ResponseDataBean;
 import edu.mum.mumscrum.datalayer.model.Sprint;
 import edu.mum.mumscrum.service.SprintService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
-
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.POST;
 
 @Path("SprintControllerWS")
 public class SprintController extends MUMScrumController {
@@ -37,9 +36,8 @@ public class SprintController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllSprints() {
 		List<Sprint> sprintlist = sprintservice.getAllSprints();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, sprintlist);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, sprintlist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -50,9 +48,8 @@ public class SprintController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSprintById(@PathParam("id") String id) {
 		Sprint sprint = sprintservice.getSprintById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, sprint);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, sprint);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -64,9 +61,8 @@ public class SprintController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addSprint(Sprint sprint) {
 		Sprint spr = sprintservice.addSprint(sprint);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -78,9 +74,8 @@ public class SprintController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateSprint(Sprint sprint) {
 		Sprint spr = sprintservice.updateSprint(sprint);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -92,9 +87,8 @@ public class SprintController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSprint(Sprint sprint) {
 		Sprint spr = sprintservice.deleteSprint(sprint);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -107,9 +101,8 @@ public class SprintController extends MUMScrumController {
 	public Response deleteSprintById(@PathParam("id") String id) {
 		sprintservice.setSprintIdNull(id);
 		List<Sprint> spr = sprintservice.deleteSprintById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

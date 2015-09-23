@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.JsonObject;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.databean.ResponseDataBean;
 import edu.mum.mumscrum.datalayer.model.Product;
 import edu.mum.mumscrum.service.ProductService;
@@ -35,9 +35,8 @@ public class ProductController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllProducts() {
 		List<Product> productsList = productService.getAllProducts();
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, productsList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productsList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -48,10 +47,8 @@ public class ProductController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getProductById(@PathParam("id") String id) {
 		Product productResultObject = productService.getProductById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				productResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -64,10 +61,8 @@ public class ProductController extends MUMScrumController {
 	public Response addProduct(Product product) {
 
 		Product productResultObject = productService.addProduct(product);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				productResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -79,10 +74,8 @@ public class ProductController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateProduct(Product product) {
 		Product productResultObject = productService.updateProduct(product);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				productResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -100,9 +93,8 @@ public class ProductController extends MUMScrumController {
 		 */
 
 		List<Product> productsList = productService.deleteProductById(id);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS, productsList);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productsList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -114,10 +106,8 @@ public class ProductController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteProduct(Product product) {
 		Product productResultObject = productService.deleteProduct(product);
-		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				ConfigurationConstants.ErrorMessage.SUCCESS,
-				productResultObject);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

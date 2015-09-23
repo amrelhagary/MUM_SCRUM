@@ -1,34 +1,18 @@
 package edu.mum.mumscrum.databean;
 
+import edu.mum.mumscrum.datalayer.model.Employee;
+
 public class AuthenticationDataBean {
 
-	private String username;
-	private String password;
-	private String roleDesc;
+	private Employee employee;
 	private String homeRoute;
 
-	public String getUsername() {
-		return username;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRoleDesc() {
-		return roleDesc;
-	}
-
-	public void setRoleDesc(String roleDesc) {
-		this.roleDesc = roleDesc;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public String getHomeRoute() {
