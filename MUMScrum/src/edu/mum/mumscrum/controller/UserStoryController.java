@@ -47,9 +47,39 @@ public class UserStoryController extends MUMScrumController {
 	@GET
 	@Path("/product/{id}/userstory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUserStoriesByProductId(@PathParam("id") String productId) {
+	public Response getAllUserStoriesByProductId(
+			@PathParam("id") String productId) {
 		List<Userstory> userStoriesList = userStoryService
-				.getUserStoriesByProductId(productId);
+				.getAllUserStoriesByProductId(productId);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, userStoriesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
+	}
+
+	@GET
+	@Path("/sprint/{id}/userstory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUserStoriesBySprintId(@PathParam("id") String sprintId) {
+		List<Userstory> userStoriesList = userStoryService
+				.getAllUserStoriesBySprintId(sprintId);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, userStoriesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
+	}
+
+	@GET
+	@Path("/nonsprint/userstory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUserStoriesNotAssignedToSprint(
+			@PathParam("id") String sprintId) {
+		List<Userstory> userStoriesList = userStoryService
+				.getAllUserStoriesNotAssignedToSprint();
 		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
 				ErrorMessage.SUCCESS, userStoriesList);
 		JsonObject result = MUMScrumUtil
