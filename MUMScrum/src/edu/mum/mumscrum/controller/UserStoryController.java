@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.JsonObject;
 
 import edu.mum.mumscrum.common.ConfigurationConstants;
+import edu.mum.mumscrum.databean.ResponseDataBean;
 import edu.mum.mumscrum.datalayer.model.Userstory;
 import edu.mum.mumscrum.service.UserStoryService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
@@ -34,12 +35,10 @@ public class UserStoryController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAllUserStorys() {
-		List<Userstory> userStorysList = userStoryService.getAllUserStorys();
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStorysList);
+		List<Userstory> userStoriesList = userStoryService.getAllUserStorys();
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, userStoriesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -51,11 +50,9 @@ public class UserStoryController extends MUMScrumController {
 	public Response getUserStoriesByProductId(@PathParam("id") String productId) {
 		List<Userstory> userStoriesList = userStoryService
 				.getUserStoriesByProductId(productId);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStoriesList);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, userStoriesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -66,11 +63,10 @@ public class UserStoryController extends MUMScrumController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserStoryById(@PathParam("id") String id) {
 		Userstory userStoryResultObject = userStoryService.getUserStoryById(id);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStoryResultObject);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -83,11 +79,10 @@ public class UserStoryController extends MUMScrumController {
 	public Response addUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.addUserStory(userstory);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStoryResultObject);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -100,11 +95,10 @@ public class UserStoryController extends MUMScrumController {
 	public Response updateUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.updateUserStory(userstory);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStoryResultObject);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -114,13 +108,11 @@ public class UserStoryController extends MUMScrumController {
 	@Path("/userstory/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUserStoryById(@PathParam("id") String id) {
-		List<Userstory> userStorysList = userStoryService
+		List<Userstory> userStoriesList = userStoryService
 				.deleteUserStoryById(id);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStorysList);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS, userStoriesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -133,11 +125,10 @@ public class UserStoryController extends MUMScrumController {
 	public Response deleteUserStory(Userstory userstory) {
 		Userstory userStoryResultObject = userStoryService
 				.deleteUserStory(userstory);
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(userStoryResultObject);
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				userStoryResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
