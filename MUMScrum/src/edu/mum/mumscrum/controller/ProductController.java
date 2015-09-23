@@ -1,5 +1,6 @@
 package edu.mum.mumscrum.controller;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -39,7 +40,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productsList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -51,7 +53,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@POST
@@ -65,7 +68,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@PUT
@@ -78,7 +82,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -97,7 +102,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productsList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -110,7 +116,8 @@ public class ProductController extends MUMScrumController {
 				ErrorMessage.SUCCESS, productResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 }

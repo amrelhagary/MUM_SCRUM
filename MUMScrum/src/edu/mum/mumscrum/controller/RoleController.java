@@ -1,5 +1,6 @@
 package edu.mum.mumscrum.controller;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -34,6 +35,7 @@ public class RoleController extends MUMScrumController {
 				ErrorMessage.SUCCESS, rolesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 }

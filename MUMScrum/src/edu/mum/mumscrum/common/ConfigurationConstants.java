@@ -12,6 +12,14 @@ public class ConfigurationConstants {
 		public final static String AUTHENTICATION_FAILED = "Authentication Failed";
 	}
 
+	public interface AuthenticationStandard {
+		public final static String BASIC = "Basic";
+	}
+
+	public interface CharacterEncoding {
+		public final static String UTF_8 = "UTF-8";
+	}
+
 	public enum SortingType {
 
 		DESCENDING(1, "Descending"), ASCENDING(2, "Ascending");
@@ -88,4 +96,5 @@ public class ConfigurationConstants {
 		public final static long START = 0;
 		public final static long STOP = 1;
 	}
+
 }

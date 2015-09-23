@@ -1,5 +1,6 @@
 package edu.mum.mumscrum.controller;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -40,7 +41,8 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, sprintlist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -52,7 +54,8 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, sprint);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@POST
@@ -65,7 +68,8 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@PUT
@@ -78,7 +82,8 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -91,7 +96,8 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -105,6 +111,7 @@ public class SprintController extends MUMScrumController {
 				ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 }// SprintController

@@ -1,5 +1,7 @@
 package edu.mum.mumscrum.controller;
 
+import java.net.HttpURLConnection;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -34,6 +36,7 @@ public class AuthenticationController extends MUMScrumController {
 				authenticationObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 }

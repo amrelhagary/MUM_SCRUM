@@ -1,5 +1,6 @@
 package edu.mum.mumscrum.controller;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -55,7 +56,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -67,7 +69,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, scrumMastersList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -80,7 +83,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, assigneesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -92,7 +96,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@GET
@@ -105,7 +110,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@POST
@@ -118,7 +124,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@PUT
@@ -132,7 +139,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -148,7 +156,8 @@ public class EmployeeController extends MUMScrumController {
 				ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 	@DELETE
@@ -164,7 +173,8 @@ public class EmployeeController extends MUMScrumController {
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 
-		return Response.status(200).entity(result.toString()).build();
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
 	}
 
 }

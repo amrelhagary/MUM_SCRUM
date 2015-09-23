@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.StringTokenizer;
 
+import edu.mum.mumscrum.common.ConfigurationConstants.AuthenticationStandard;
+import edu.mum.mumscrum.common.ConfigurationConstants.CharacterEncoding;
 import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.common.ConfigurationConstants.RoleTypeHomeRoute;
 import edu.mum.mumscrum.databean.AuthenticationDataBean;
@@ -71,13 +73,14 @@ public class AuthenticationService {
 		}
 		// header value format will be "Basic encodedstring" for Basic
 		// authentication. Example "Basic YWRtaW46YWRtaW4="
-		final String encodedUserPassword = authCredentials.replaceFirst("Basic"
-				+ " ", "");
+		final String encodedUserPassword = authCredentials.replaceFirst(
+				AuthenticationStandard.BASIC + " ", "");
 		String usernameAndPassword = null;
 		try {
 			byte[] decodedBytes = Base64.getDecoder().decode(
 					encodedUserPassword);
-			usernameAndPassword = new String(decodedBytes, "UTF-8");
+			usernameAndPassword = new String(decodedBytes,
+					CharacterEncoding.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
