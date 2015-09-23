@@ -4,19 +4,17 @@
 		.factory('AuthService',['Base64','$http','$rootScope','$timeout','$cookies',
 			function(Base64,$http,$rootScope,$timeout,$cookies){
 			var service = {};
-			service.login = function(username,password,callback){
+			service.login = function(employee,callback){
 
 				$http
-					.post('http://localhost:8085/MUMScrum/API/AuthenticationControllerWS/authenticate',{username: username,password: password})
+					.post('http://localhost:8085/MUMScrum/API/AuthenticationControllerWS/authenticate',{employee})
 					.success(function(response){
                         var returnData = { success : false };
                         if(response.status == 'ok')
                         {
                             returnData = {
                                 success: true,
-                                username: response.data.username,
-                                password: response.data.password,
-                                role: response.data.roleDesc,
+                                employee: response.data.employee,
                                 home_route: response.data.homeRoute
                             };
 
@@ -60,13 +58,14 @@
 
 			};
 
-			service.setCredentials = function(username,password,user_role){
-				var authdata = Base64.encode(username + ':' + password);
+			service.setCredentials = function(user,home_route){
+				var authdata = Base64.encode(user.username + ':' + user.password);
 				$rootScope.globals = {
 					currentUser: {
                         authdata: authdata,
-						username: username,
-						user_role: user_role,
+						username: user.username,
+						user_role: user.role.roleDesc,
+                        user: user,
                         is_auth: true
 					}
 				};

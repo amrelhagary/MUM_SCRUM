@@ -20,10 +20,10 @@ angular
 
 		if(isValid)
 		{
-			AuthService.login($scope.username,$scope.password,function(response){
+			AuthService.login($scope.employee,function(response){
 				if(response.success)
 				{
-					AuthService.setCredentials(response.username,response.password,response.role);
+					AuthService.setCredentials(response.employee,response.home_route);
 					$location.path(response.home_route);
 				}else{
 					$scope.message = response.message;
