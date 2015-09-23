@@ -64,10 +64,10 @@ public class ProductDAO {
 		String deletesql4 = 
 				"delete from RELEASE r  where r.PRD_ID = " + id;
 
-		mumScrumDAO.deleteAllChild(deletesql1 );	
-		mumScrumDAO.deleteAllChild(deletesql2);
-		mumScrumDAO.deleteAllChild(deletesql3);
-		mumScrumDAO.deleteAllChild(deletesql4);	
+		mumScrumDAO.executeSqlStatement(deletesql1 );	
+		mumScrumDAO.executeSqlStatement(deletesql2);
+		mumScrumDAO.executeSqlStatement(deletesql3);
+		mumScrumDAO.executeSqlStatement(deletesql4);	
 
 	}
 

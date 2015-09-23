@@ -96,6 +96,7 @@ public class MUMScrumDAO {
 		instantiateConnection();
 		T clone;
 		clone = (T) uow.registerObject(t);
+//		System.out.println(clone.toString());
 		terminateConnection();
 		return clone;
 	}
@@ -111,7 +112,6 @@ public class MUMScrumDAO {
 	public int executeJpqlUpdate(String updatequery, String updatequery1) {
 		instantiateConnection();
 		try {
-			
 			uow.executeNonSelectingCall(new SQLCall(updatequery));
 			uow.executeNonSelectingCall(new SQLCall(updatequery1));
 			return 1;// Success 
@@ -148,15 +148,10 @@ public class MUMScrumDAO {
 		deleteAllObjects(clone);
 		return clone;
 	}
-
-	public int deleteAllChild(String d1 ) {
+	public int executeSqlStatement(String sql) {
 		instantiateConnection();
 		try {
-			System.out.println(d1);
-			uow.executeNonSelectingCall(new SQLCall(d1));
-
-			System.out.println("scec");
-//			uow.executeNonSelectingCall(new SQLCall(updatequery1));
+			uow.executeNonSelectingCall(new SQLCall(sql));
 			return 1;// Success 
 			
 		} catch (Exception ex) {
