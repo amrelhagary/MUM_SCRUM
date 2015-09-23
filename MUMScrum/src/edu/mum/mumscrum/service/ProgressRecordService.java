@@ -55,4 +55,27 @@ public class ProgressRecordService {
 		}
 		return burndownChartDataList;
 	}
+
+	public ProgressRecord getProgressRecordById(String id) {
+		return progressRecordDAO.getProgressRecordById(id);
+	}
+/*
+ * to be delete on lunching the app
+ * */
+	public void updateStartTime(ProgressRecord pr, long flagid) {
+		System.out.println(flagid + " if stm ");
+		
+		if(flagid == 0 )
+		 progressRecordDAO.updateStartTime(pr);
+		
+	}
+	///////delete 
+
+	public ProgressRecord ckeckFlagStatus(ProgressRecord pr) {
+		long flagid = pr.getFlag(); //flagId
+		Date date = new Date();
+		long curtime = date.getTime();//get current time		
+		progressRecordDAO.startEndTimeEstm(pr , flagid, curtime);
+		return  pr;
+	}
 }
