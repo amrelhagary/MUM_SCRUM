@@ -21,7 +21,10 @@
 						<th>Release</th>
 						<th>Sprint</th>
 						<th>Severity</th>
-						<th></th>
+						<th ng-show="globals.currentUser.user_role === 'Product Owner'"></th>
+						<td ng-show="globals.currentUser.user_role === 'Scrum Master'">
+						Assign
+						</td>
 					</tr>
 					<tr ng-repeat="userstory in userstories | filter: searchUserstory">
 
@@ -43,12 +46,19 @@
 						<td>
 							{{ userstory.severity.severityDesc }}
 						</td>
-						<td>                                            
+						<td ng-show="globals.currentUser.user_role === 'Product Owner'">                                            
 							<div class="tools">
 								<a href="#/userstory/edit/{{userstory.id}}"><i class="fa fa-edit"></i></a>
 								<a href="javascript: void(0)" ng-click="deleteUserstory(userstory.id,$index)"><i class="fa fa-trash-o"></i></a>
 							</div>
 						</td>
+						
+						<td ng-show="globals.currentUser.user_role === 'Scrum Master'">                                            
+							<div class="tools">
+								<a href="#/userstory/assign/{{userstory.id}}"><i class="glyphicon glyphicon-user"></i></a>
+							</div>
+						</td>
+
 					</tr>
 				</table>
 			</div><!-- /.box-body -->

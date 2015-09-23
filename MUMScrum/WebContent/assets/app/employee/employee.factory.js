@@ -18,4 +18,9 @@ angular
 		return $resource('http://localhost:8085/MUMScrum/API/EmployeeControllerWS/employee/scrummaster',{},{
 			'query': {method: 'GET', isArray: false }
 		})
-	}]);
+	}])
+	.factory('AssignList', ['$resource', function($resource){
+		return $resource('http://localhost:8085/MUMScrum/API/EmployeeControllerWS/employee/assignee', {}, {
+			'query': {method: 'GET', isArray: false }
+		})
+	}])
