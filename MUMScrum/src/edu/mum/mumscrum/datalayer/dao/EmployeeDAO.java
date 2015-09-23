@@ -29,7 +29,8 @@ public class EmployeeDAO {
 	}
 
 	public List<Employee> getAllScrumMasters(int id) {
-		Expression expression = new ExpressionBuilder().get("id").equal(id);
+		Expression expression = new ExpressionBuilder().get("role")
+				.get("roleId").equal(id);
 		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
 				expression, SortingType.ASCENDING, "id");
 	}
