@@ -16,6 +16,18 @@ public class UserStoryService {
 		return userStoryDAO.getAllUserStorys();
 	}
 
+	public List<Userstory> getAllUserStoriesByProductId(String productId) {
+		return userStoryDAO.getAllUserStoriesByProductId(productId);
+	}
+
+	public List<Userstory> getAllUserStoriesBySprintId(String sprintId) {
+		return userStoryDAO.getAllUserStoriesBySprintId(sprintId);
+	}
+
+	public List<Userstory> getAllUserStoriesNotAssignedToSprint() {
+		return userStoryDAO.getAllUserStoriesNotAssignedToSprint();
+	}
+
 	public Userstory getUserStoryById(String id) {
 		return userStoryDAO.getUserStoryById(id);
 	}
@@ -34,10 +46,6 @@ public class UserStoryService {
 
 	public List<Userstory> deleteUserStoryById(String id) {
 		return userStoryDAO.deleteUserStoryById(id);
-	}
-
-	public List<Userstory> getUserStoriesByProductId(String productId) {
-		return userStoryDAO.getUserStoriesByProductId(productId);
 	}
 
 }
