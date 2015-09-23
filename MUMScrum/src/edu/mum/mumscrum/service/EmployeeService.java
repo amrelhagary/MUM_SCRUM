@@ -2,7 +2,6 @@ package edu.mum.mumscrum.service;
 
 import java.util.List;
 
-import edu.mum.mumscrum.common.ConfigurationConstants;
 import edu.mum.mumscrum.datalayer.dao.EmployeeDAO;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
@@ -15,12 +14,6 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmployees() {
 		return employeeDAO.getAllEmployees();
-	}
-
-	public List<Employee> getAllScrumMasters() {
-		return employeeDAO
-				.getAllScrumMasters(ConfigurationConstants.RoleTypeHomeRoute.SCRUM_MASTER
-						.getId());
 	}
 
 	public Employee getEmployeeById(String id) {
@@ -45,6 +38,10 @@ public class EmployeeService {
 
 	public List<Employee> deleteEmployeeById(String id) {
 		return employeeDAO.deleteEmployeeById(id);
+	}
+
+	public void setEmpIdNull(String id) {
+		employeeDAO.setEmpIdNull(id,"na","na","na","e");
 	}
 
 }

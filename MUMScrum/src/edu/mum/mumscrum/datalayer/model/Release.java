@@ -34,7 +34,7 @@ public class Release implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "RELS_DATE")
-	private Date relsDate;
+	private String relsDate;
 
 	@Column(name = "RELS_DESC")
 	private String relsDesc;
@@ -71,11 +71,11 @@ public class Release implements Serializable {
 		this.id = id;
 	}
 
-	public Date getRelsDate() {
+	public String getRelsDate() {
 		return this.relsDate;
 	}
 
-	public void setRelsDate(Date relsDate) {
+	public void setRelsDate(String relsDate) {
 		this.relsDate = relsDate;
 	}
 

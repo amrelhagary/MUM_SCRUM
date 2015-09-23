@@ -65,6 +65,7 @@ public class ProductController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addProduct(Product product) {
+		
 		Product productResultObject = productService.addProduct(product);
 		responseObject
 				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
@@ -96,6 +97,12 @@ public class ProductController extends MUMScrumController {
 	@Path("/product/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteProductById(@PathParam("id") String id) {
+		
+		productService.deleteAllChild(id);
+		/*
+		 *  On delete for a Product cascade delete for PROGRESS_RECORD, US, Sprint, Release by prd_id 
+		 */
+		
 		List<Product> productsList = productService.deleteProductById(id);
 		responseObject
 				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);

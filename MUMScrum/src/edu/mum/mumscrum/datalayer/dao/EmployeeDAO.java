@@ -28,13 +28,6 @@ public class EmployeeDAO {
 				new ExpressionBuilder(), SortingType.ASCENDING, "id");
 	}
 
-	public List<Employee> getAllScrumMasters(int id) {
-		Expression expression = new ExpressionBuilder().get("role")
-				.get("roleId").equal(id);
-		return mumScrumDAO.getAllObjectsByExpression(Employee.class,
-				expression, SortingType.ASCENDING, "id");
-	}
-
 	public Employee getEmployeeById(String id) {
 		Expression expression = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.getObjectByExpression(Employee.class, expression);
@@ -63,4 +56,14 @@ public class EmployeeDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Employee.class,
 				expression);
 	}
+
+	public void setEmpIdNull(String id, String string, String string2, String string3, String string4) {
+		String up1 = " update Product   set emp_id = null where emp_id = " + id ;
+		String up2 = " update Release   set emp_id = null where emp_id = " + id ;
+		String up3 = " update UserStory set emp_id = null where emp_id = " + id ;
+		String up4 = " update SPRINT    set emp_id = null where emp_id = " + id ;
+		mumScrumDAO.executeJpqlUpdate(up1, up2);
+		mumScrumDAO.executeJpqlUpdate(up3, up4);
+	}
+
 }

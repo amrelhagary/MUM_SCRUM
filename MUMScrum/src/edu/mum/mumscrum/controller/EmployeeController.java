@@ -62,22 +62,6 @@ public class EmployeeController extends MUMScrumController {
 	}
 
 	@GET
-	@Path("/employee/srcummaster")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getAllScrumMasters() {
-		List<Employee> employeesList = employeeService.getAllScrumMasters();
-		responseObject
-				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject
-				.setMessage(ConfigurationConstants.ResponseMessage.SUCCESS);
-		responseObject.setData(employeesList);
-		JsonObject result = MUMScrumUtil
-				.prepareJsonObjectResponse(responseObject);
-		return Response.status(200).entity(result.toString()).build();
-	}
-
-	@GET
 	@Path("/employee/{id:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployeeById(@PathParam("id") String id) {
@@ -145,6 +129,10 @@ public class EmployeeController extends MUMScrumController {
 	@Path("/employee/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteEmployeeById(@PathParam("id") String id) {
+	/*
+	 *   Before deleting an employee set emp_id to null for other tables
+     */
+		employeeService.setEmpIdNull(id);
 		List<Employee> employeesList = employeeService.deleteEmployeeById(id);
 		responseObject
 				.setStatus(ConfigurationConstants.ResponseMessage.SUCCESS);
@@ -161,6 +149,7 @@ public class EmployeeController extends MUMScrumController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteEmployee(Employee employee) {
+		
 		Employee employeeResultObject = employeeService
 				.deleteEmployee(employee);
 		responseObject

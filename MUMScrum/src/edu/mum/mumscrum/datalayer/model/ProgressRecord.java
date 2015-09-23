@@ -39,10 +39,7 @@ public class ProgressRecord implements Serializable {
 	@Column(name = "STOP_TIME")
 	private long stopTime;
 
-	// bi-directional many-to-one association to Employee
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "EMP_ID")
-	private Employee employee;
+
 
 	// bi-directional many-to-one association to Sprint
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -96,15 +93,6 @@ public class ProgressRecord implements Serializable {
 	public void setStopTime(long stopTime) {
 		this.stopTime = stopTime;
 	}
-
-	public Employee getEmployee() {
-		return this.employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
 	public Sprint getSprint() {
 		return this.sprint;
 	}
