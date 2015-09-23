@@ -37,8 +37,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response getAllReleases() {
 		List<Release> releaselist = releaseservice.getAllReleases();
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, releaselist);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, releaselist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -51,8 +51,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response getReleaseById(@PathParam("id") String id) {
 		Release release = releaseservice.getReleaseById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, release);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, release);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -65,8 +65,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response addRelease(Release release) {
 		Release rls = releaseservice.addRelease(release);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rls);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -79,8 +79,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response updateRelease(Release release) {
 		Release rls = releaseservice.updateRelease(release);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rls);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -93,8 +93,8 @@ public class ReleaseController extends MUMScrumController {
 		releaseservice.setReleasIdNull(id);
 		List<Release> releaselist = releaseservice.deleteReleaseById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, releaselist);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, releaselist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -107,8 +107,8 @@ public class ReleaseController extends MUMScrumController {
 	public Response deleteAllreleases(Release release) {
 		Release rls = releaseservice.deleteRelease(release);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rls);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, rls);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

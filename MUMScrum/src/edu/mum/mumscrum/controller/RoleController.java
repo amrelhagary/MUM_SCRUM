@@ -33,8 +33,8 @@ public class RoleController extends MUMScrumController {
 	public Response getAllRoles() {
 		List<Role> rolesList = roleService.getAllRoles();
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, rolesList);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, rolesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

@@ -38,8 +38,8 @@ public class SprintController extends MUMScrumController {
 	public Response getAllSprints() {
 		List<Sprint> sprintlist = sprintservice.getAllSprints();
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, sprintlist);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, sprintlist);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -51,8 +51,8 @@ public class SprintController extends MUMScrumController {
 	public Response getSprintById(@PathParam("id") String id) {
 		Sprint sprint = sprintservice.getSprintById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, sprint);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, sprint);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -65,8 +65,8 @@ public class SprintController extends MUMScrumController {
 	public Response addSprint(Sprint sprint) {
 		Sprint spr = sprintservice.addSprint(sprint);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, spr);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -79,8 +79,8 @@ public class SprintController extends MUMScrumController {
 	public Response updateSprint(Sprint sprint) {
 		Sprint spr = sprintservice.updateSprint(sprint);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, spr);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -93,8 +93,8 @@ public class SprintController extends MUMScrumController {
 	public Response deleteSprint(Sprint sprint) {
 		Sprint spr = sprintservice.deleteSprint(sprint);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, spr);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -108,8 +108,8 @@ public class SprintController extends MUMScrumController {
 		sprintservice.setSprintIdNull(id);
 		List<Sprint> spr = sprintservice.deleteSprintById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, spr);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, spr);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();

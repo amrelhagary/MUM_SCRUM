@@ -18,7 +18,7 @@ public class AuthenticationService {
 	public String authenticate(AuthenticationDataBean authenticationObject) {
 		if (authenticationObject.getUsername() == null
 				|| authenticationObject.getPassword() == null) {
-			return ConfigurationConstants.ResponseMessage.AUTHENTICATION_FAILED;
+			return ConfigurationConstants.ErrorMessage.USERNAME_OR_PASSWORD_VALUE_IS_REQUIRED;
 		}
 
 		Employee employee = employeeService
@@ -27,18 +27,20 @@ public class AuthenticationService {
 		if (employee != null) {
 			if (!employee.getPassword().equals(
 					authenticationObject.getPassword())) {
-				return ConfigurationConstants.ResponseMessage.AUTHENTICATION_FAILED;
+				return ConfigurationConstants.ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
 			}
+		} else {
+			return ConfigurationConstants.ErrorMessage.INVALID_USERNAME_OR_PASSWORD;
 		}
 
 		authenticationObject.setRoleDesc(employee.getRole().getRoleDesc());
 		String homeRoute = getAuthObjHomeRoute(employee);
-		if (homeRoute == null) {
-			return ConfigurationConstants.ResponseMessage.AUTHENTICATION_FAILED;
-		}
+		// if (homeRoute == null) {
+		// return ConfigurationConstants.ErrorMessage.AUTHENTICATION_FAILED;
+		// }
 		authenticationObject.setHomeRoute(homeRoute);
 
-		return ConfigurationConstants.ResponseMessage.SUCCESS;
+		return ConfigurationConstants.ErrorMessage.SUCCESS;
 	}
 
 	private String getAuthObjHomeRoute(Employee employee) {

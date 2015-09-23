@@ -53,8 +53,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response getAllEmployees() {
 		List<Employee> employeesList = employeeService.getAllEmployees();
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, employeesList);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -67,8 +67,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response getAllScrumMasters() {
 		List<Employee> scrumMastersList = employeeService.getAllScrumMasters();
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				scrumMastersList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
@@ -81,8 +81,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response getEmployeeById(@PathParam("id") String id) {
 		Employee employeeResultObject = employeeService.getEmployeeById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
@@ -96,8 +96,8 @@ public class EmployeeController extends MUMScrumController {
 		Employee employeeResultObject = employeeService
 				.getEmployeeByUsername(username);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
@@ -111,8 +111,8 @@ public class EmployeeController extends MUMScrumController {
 	public Response addEmployee(Employee employee) {
 		Employee employeeResultObject = employeeService.addEmployee(employee);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
@@ -127,8 +127,8 @@ public class EmployeeController extends MUMScrumController {
 		Employee employeeResultObject = employeeService
 				.updateEmployee(employee);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
@@ -145,8 +145,8 @@ public class EmployeeController extends MUMScrumController {
 		employeeService.setEmpIdNull(id);
 		List<Employee> employeesList = employeeService.deleteEmployeeById(id);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS, employeesList);
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS, employeesList);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);
 		return Response.status(200).entity(result.toString()).build();
@@ -161,8 +161,8 @@ public class EmployeeController extends MUMScrumController {
 		Employee employeeResultObject = employeeService
 				.deleteEmployee(employee);
 		responseObject = new ResponseDataBean(
-				ConfigurationConstants.ResponseMessage.SUCCESS,
-				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
+				ConfigurationConstants.ErrorMessage.SUCCESS,
 				employeeResultObject);
 		JsonObject result = MUMScrumUtil
 				.prepareJsonObjectResponse(responseObject);

@@ -1,12 +1,14 @@
 package edu.mum.mumscrum.common;
 
 public class ConfigurationConstants {
-	public interface ResponseMessage {
+	public interface ErrorMessage {
 		public final static String ORACLE_DRIVE_CLASS_NOT_FOUND_EXCEPTION = "Class not found exception - Oracle Drive";
 		public final static String SQL_EXCEPTION = "SQL Exception";
 		public final static String JSON_EXCEPTION = "JSON Exception ";
 		public final static String SUCCESS = "ok";
 		public final static String FAIL = "fail";
+		public final static String USERNAME_OR_PASSWORD_VALUE_IS_REQUIRED = "Username/Password value is required";
+		public final static String INVALID_USERNAME_OR_PASSWORD = "Invalid Username/Password";
 		public final static String AUTHENTICATION_FAILED = "Authentication Failed";
 	}
 

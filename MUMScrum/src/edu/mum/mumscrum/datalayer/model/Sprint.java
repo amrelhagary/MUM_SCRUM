@@ -28,7 +28,7 @@ public class Sprint implements Serializable {
 	private long id;
 
 	@Column(name = "EST_TIME")
-	private String estTime;
+	private long estTime;
 
 	@Column(name = "SPR_NAME")
 	private String sprName;
@@ -54,11 +54,11 @@ public class Sprint implements Serializable {
 		this.id = id;
 	}
 
-	public String getEstTime() {
+	public long getEstTime() {
 		return this.estTime;
 	}
 
-	public void setEstTime(String estTime) {
+	public void setEstTime(long estTime) {
 		this.estTime = estTime;
 	}
 
