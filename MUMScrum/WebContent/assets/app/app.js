@@ -12,7 +12,8 @@ var scrumApp = angular.module('scrumApp', [
   'scrumApp.employee',
   'scrumApp.product',
   'scrumApp.userstory',
-  'scrumApp.release'
+  'scrumApp.release',
+  'scrumApp.sprint'
 ])
 .run(['$http','$rootScope', '$location','$cookies',
     function ($http,$rootScope, $location,$cookies) {
