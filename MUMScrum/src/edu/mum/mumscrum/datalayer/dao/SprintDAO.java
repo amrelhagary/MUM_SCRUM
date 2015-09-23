@@ -51,12 +51,11 @@ public class SprintDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Sprint.class, exp);
 	}
 
-	public int setReleasIdNull(String id, String table1, String table2) {
-		String updateussql  = " update " +  table1 + "   set  spr_id = null where  spr_ID = " + id ;
-		String updatesprsql = " update " +  table2 +  "  set  spr_id = null where  spr_ID = " + id ;
-    	return mumScrumDAO.executeJpqlUpdate(updateussql , updatesprsql);
+	public void setReleasIdNull(String id) {
+		String updateussql  = " update userStory set  spr_id = null where  spr_ID = " + id ;
+		String updatesprsql = " update progress_record set  spr_id = null where  spr_ID = " + id ;
+    	mumScrumDAO.executeNonSelectingSQLCall(updateussql);
+    	mumScrumDAO.executeNonSelectingSQLCall(updatesprsql);
 	}
-	
-	
 	
 }

@@ -52,10 +52,9 @@ public class ProductDAO {
 				expression);
 	}
 
-	public void deleteAllChild(String id, String table1, String table2, String table3) {
+	public void deleteAllChild(String id) {
 		String deletesql1 = 
-				" delete from " +
-						table1 +  " p where p.usid in ( "
+				" delete from PROGRESS_RECORD p where p.usid in ( "
 					+ " select us.ID from USERSTORY us where us.PRD_ID = " + id + ")" ;
 		String deletesql2 =
 				" delete from USERSTORY us where us.PRD_ID = " + id;
@@ -64,10 +63,10 @@ public class ProductDAO {
 		String deletesql4 = 
 				"delete from RELEASE r  where r.PRD_ID = " + id;
 
-		mumScrumDAO.executeSqlStatement(deletesql1 );	
-		mumScrumDAO.executeSqlStatement(deletesql2);
-		mumScrumDAO.executeSqlStatement(deletesql3);
-		mumScrumDAO.executeSqlStatement(deletesql4);	
+		mumScrumDAO.executeNonSelectingSQLCall(deletesql1 );	
+		mumScrumDAO.executeNonSelectingSQLCall(deletesql2);
+		mumScrumDAO.executeNonSelectingSQLCall(deletesql3);
+		mumScrumDAO.executeNonSelectingSQLCall(deletesql4);	
 
 	}
 

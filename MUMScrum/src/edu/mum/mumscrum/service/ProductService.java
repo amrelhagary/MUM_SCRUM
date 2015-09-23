@@ -38,8 +38,8 @@ public class ProductService {
 	}
 
 	public void deleteAllChild(String id) {
-		productDAO.deleteAllChild(id,"PROGRESS_RECORD","name","name");
-		
+		productDAO.deleteAllChild(id);
+
 	}
 
 }

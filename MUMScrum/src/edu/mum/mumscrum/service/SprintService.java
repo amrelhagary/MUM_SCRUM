@@ -34,8 +34,8 @@ public class SprintService {
 	public List<Sprint> deleteSprintById(String id) {
 		return sprintdao.deleteSprintById(id);
 	}
-	public int setSprintIdNull(String id) {
-		return sprintdao.setReleasIdNull(id , " userStory" , " progress_record ");
+	public void setSprintIdNull(String id) {
+		sprintdao.setReleasIdNull(id);
 	}
 	
 }

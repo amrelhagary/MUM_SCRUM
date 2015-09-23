@@ -74,6 +74,20 @@ public class EmployeeController extends MUMScrumController {
 	}
 
 	@GET
+	@Path("/employee/nonrelease/srcummaster")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllScrumMastersNotAssignedToRelease() {
+		List<Employee> scrumMastersList = employeeService
+				.getAllScrumMastersNotAssignedToRelease();
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, scrumMastersList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
+	}
+
+	@GET
 	@Path("/employee/assignee")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllUserStoryAssignees() {

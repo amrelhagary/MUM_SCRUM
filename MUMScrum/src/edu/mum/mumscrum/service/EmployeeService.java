@@ -20,6 +20,10 @@ public class EmployeeService {
 		return employeeDAO.getAllScrumMasters();
 	}
 
+	public List<Employee> getAllScrumMastersNotAssignedToRelease() {
+		return employeeDAO.getAllScrumMastersNotAssignedToRelease();
+	}
+
 	public List<Employee> getAllUserStoryAssignees() {
 		return employeeDAO.getAllUserStoryAssignees();
 	}
@@ -49,7 +53,7 @@ public class EmployeeService {
 	}
 
 	public void setEmpIdNull(String id) {
-		employeeDAO.setEmpIdNull(id, "na", "na", "na", "e");
+		employeeDAO.setEmpIdNull(id);
 	}
 
 }

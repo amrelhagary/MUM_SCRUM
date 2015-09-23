@@ -74,14 +74,20 @@ public class EmployeeDAO {
 				expression);
 	}
 
-	public void setEmpIdNull(String id, String string, String string2,
-			String string3, String string4) {
+	public void setEmpIdNull(String id) {
 		String up1 = " update Product   set emp_id = null where emp_id = " + id;
 		String up2 = " update Release   set emp_id = null where emp_id = " + id;
 		String up3 = " update UserStory set emp_id = null where emp_id = " + id;
 		String up4 = " update SPRINT    set emp_id = null where emp_id = " + id;
-		mumScrumDAO.executeJpqlUpdate(up1, up2);
-		mumScrumDAO.executeJpqlUpdate(up3, up4);
+		mumScrumDAO.executeNonSelectingSQLCall(up1);
+		mumScrumDAO.executeNonSelectingSQLCall(up2);
+		mumScrumDAO.executeNonSelectingSQLCall(up3);
+		mumScrumDAO.executeNonSelectingSQLCall(up4);
+	}
+
+	public List<Employee> getAllScrumMastersNotAssignedToRelease() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

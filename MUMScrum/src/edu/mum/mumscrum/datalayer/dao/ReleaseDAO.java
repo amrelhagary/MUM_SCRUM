@@ -57,9 +57,10 @@ public class ReleaseDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Release.class, exp);
 	}
 
-	public int setReleasIdNull(String id, String table1 , String table2) {
-		String updateussql  = " update " +  table1 + "  set  Rels_id = null where  RELS_ID = " + id;
-		String updatesprsql = " update " +  table2 +  "  set Rels_id = null where  RELS_ID = " + id  ;
-    	return mumScrumDAO.executeJpqlUpdate(updateussql , updatesprsql);
+	public void setReleasIdNull(String id) {
+		String updateussql  = " update userstory set  Rels_id = null where  RELS_ID = " + id;
+		String updatesprsql = " update sprint set Rels_id = null where  RELS_ID = " + id  ;
+    	mumScrumDAO.executeNonSelectingSQLCall(updateussql);
+    	mumScrumDAO.executeNonSelectingSQLCall(updatesprsql);
 	}
 }

@@ -19,7 +19,6 @@ public class MUMScrumDAO {
 	private JpaEntityManager em;
 	private UnitOfWork uow;
 
-
 	private MUMScrumDAO() {
 		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
 	}
@@ -43,8 +42,8 @@ public class MUMScrumDAO {
 		em.close();
 	}
 
-	private ReadAllQuery createReadAllQuery(Class clazz, Expression expression, SortingType sortingType,
-			String columnName) {
+	private ReadAllQuery createReadAllQuery(Class clazz, Expression expression,
+			SortingType sortingType, String columnName) {
 		ReadAllQuery query = new ReadAllQuery();
 		query.setReferenceClass(clazz);
 		query.setSelectionCriteria(expression);
@@ -72,10 +71,11 @@ public class MUMScrumDAO {
 		return clone;
 	}
 
-	public <T> T getAllObjectsByExpression(Class clazz, Expression expression, SortingType sortingType,
-			String columnName) {
+	public <T> T getAllObjectsByExpression(Class clazz, Expression expression,
+			SortingType sortingType, String columnName) {
 		instantiateConnection();
-		ReadAllQuery query = createReadAllQuery(clazz, expression, sortingType, columnName);
+		ReadAllQuery query = createReadAllQuery(clazz, expression, sortingType,
+				columnName);
 
 		T clone;
 		clone = (T) uow.executeQuery(query);
@@ -96,7 +96,7 @@ public class MUMScrumDAO {
 		instantiateConnection();
 		T clone;
 		clone = (T) uow.registerObject(t);
-//		System.out.println(clone.toString());
+		// System.out.println(clone.toString());
 		terminateConnection();
 		return clone;
 	}
@@ -109,20 +109,19 @@ public class MUMScrumDAO {
 		return clone;
 	}
 
-	public int executeJpqlUpdate(String updatequery, String updatequery1) {
+	public int executeNonSelectingSQLCall(String sql) {
 		instantiateConnection();
 		try {
-			uow.executeNonSelectingCall(new SQLCall(updatequery));
-			uow.executeNonSelectingCall(new SQLCall(updatequery1));
-			return 1;// Success 
-			
+			uow.executeNonSelectingCall(new SQLCall(sql));
+			return 1;// Success
+
 		} catch (Exception ex) {
-			
-			System.out.println(" MumScrumDao.executeJpqlUpdate catch msg " + ex.getMessage());
+			System.out
+					.println(" MumScrumDao.executeNonSelectingSQLCall catch msg "
+							+ ex.getMessage());
 			return -1;// fail
-		
+
 		} finally {
-			
 			System.out.println(" terminate Connection ");
 			terminateConnection();
 		}
@@ -142,27 +141,11 @@ public class MUMScrumDAO {
 		terminateConnection();
 	}
 
-	public <T> T deleteAllObjectsBasedOnExpression(Class clazz, Expression expression) {
+	public <T> T deleteAllObjectsBasedOnExpression(Class clazz,
+			Expression expression) {
 		T clone;
 		clone = getAllObjectsByExpression(clazz, expression);
 		deleteAllObjects(clone);
 		return clone;
-	}
-	public int executeSqlStatement(String sql) {
-		instantiateConnection();
-		try {
-			uow.executeNonSelectingCall(new SQLCall(sql));
-			return 1;// Success 
-			
-		} catch (Exception ex) {
-			
-			System.out.println(" MumScrumDao.executeJpqlUpdate catch msg " + ex.getMessage());
-			return -1;// fail
-		
-		} finally {
-			
-			System.out.println(" terminate Connection ");
-			terminateConnection();
-		}
 	}
 }
