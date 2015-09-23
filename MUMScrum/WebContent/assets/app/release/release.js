@@ -86,20 +86,6 @@ angular
 			templateUrl: 'release/views/_form.html'
 		}
 	}])
-	.directive('productList',['ProductFactory',function(ProductFactory){
-		return {
-			restrict: 'E',
-			templateUrl: 'release/views/_product_list.html?'+Date.now(),
-			link: function(scope,element,attrs){
-				ProductFactory.get(function(response){
-					if(response.status == 'ok')
-						scope.products = response.data;
-					else
-						console.log("Error fetch product list")
-				})
-			}
-		}
-	}])
 	.directive('scrumMasterList',['ScrumMaster',function(ScrumMaster){
 		return {
 			restrict: 'E',
