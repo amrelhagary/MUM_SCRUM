@@ -21,7 +21,7 @@
                             };
 
                         }else{
-                            returnData.message = 'Username or password is incorrect';
+                            returnData.message = response.message;
                         }
 
 						callback(returnData);
