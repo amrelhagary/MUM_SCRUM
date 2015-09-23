@@ -18,6 +18,7 @@
 						<th>ID</th>
 						<th>Title</th>
 						<th>Product</th>
+						<th>Scrum Master</th>
 						<th></th>
 					</tr>
 					<tr ng-repeat="release in releases | filter: searchReleases">
@@ -31,6 +32,11 @@
 
 						<td>
 							{{ release.product.prdName }}
+						</td>
+						
+						<td>
+							{{ release.product.employee.firstName }} 
+							{{ release.product.employee.lastName }}
 						</td>
 
 						<td>                                            
