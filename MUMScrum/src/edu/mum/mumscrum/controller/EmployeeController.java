@@ -61,6 +61,21 @@ public class EmployeeController extends MUMScrumController {
 	}
 
 	@GET
+	@Path("/employee/srcummaster")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getAllScrumMasters() {
+		List<Employee> scrumMastersList = employeeService.getAllScrumMasters();
+		responseObject = new ResponseDataBean(
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				ConfigurationConstants.ResponseMessage.SUCCESS,
+				scrumMastersList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(200).entity(result.toString()).build();
+	}
+
+	@GET
 	@Path("/employee/{id:[0-9]+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployeeById(@PathParam("id") String id) {
