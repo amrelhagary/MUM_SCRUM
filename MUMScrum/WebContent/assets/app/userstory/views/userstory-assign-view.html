@@ -13,7 +13,7 @@
 							name="employee"
 							class="form-control" 
 							ng-model="userstory.employee" 
-							ng-options="assign as (assign.firstName+' '+assign.lastName) for assign in assignList track by assign.id">
+							ng-options="assign as (assign.firstName+' '+assign.lastName+' -- '+assign.role.roleDesc) for assign in assignList track by assign.id">
 						</select>
 					</div>
 				</div>
