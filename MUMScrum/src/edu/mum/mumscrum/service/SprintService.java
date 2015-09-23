@@ -3,9 +3,7 @@ package edu.mum.mumscrum.service;
 import java.util.List;
 
 import edu.mum.mumscrum.datalayer.dao.SprintDAO;
-import edu.mum.mumscrum.datalayer.model.Release;
 import edu.mum.mumscrum.datalayer.model.Sprint;
-import oracle.net.aso.s;
 
 public class SprintService {
 

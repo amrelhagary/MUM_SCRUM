@@ -2,7 +2,6 @@ package edu.mum.mumscrum.datalayer.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Access;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
-
-import org.eclipse.persistence.jpa.config.Cascade;
 
 /**
  * The persistent class for the USERSTORY database table.

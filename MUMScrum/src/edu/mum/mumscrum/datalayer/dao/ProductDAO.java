@@ -52,4 +52,23 @@ public class ProductDAO {
 				expression);
 	}
 
+	public void deleteAllChild(String id, String table1, String table2, String table3) {
+		String deletesql1 = 
+				" delete from " +
+						table1 +  " p where p.usid in ( "
+					+ " select us.ID from USERSTORY us where us.PRD_ID = " + id + ")" ;
+		String deletesql2 =
+				" delete from USERSTORY us where us.PRD_ID = " + id;
+		String deletesql3 =
+				"delete from SPRINT s where s.RELS_ID in (select r.ID from RELEASE r where r.PRD_ID = " + id + " )" ;
+		String deletesql4 = 
+				"delete from RELEASE r  where r.PRD_ID = " + id;
+
+		mumScrumDAO.deleteAllChild(deletesql1 );	
+		mumScrumDAO.deleteAllChild(deletesql2);
+		mumScrumDAO.deleteAllChild(deletesql3);
+		mumScrumDAO.deleteAllChild(deletesql4);	
+
+	}
+
 }

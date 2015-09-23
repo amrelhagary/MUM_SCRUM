@@ -1,7 +1,7 @@
 package edu.mum.mumscrum.service;
 import java.util.List;
+
 import edu.mum.mumscrum.datalayer.dao.ReleaseDAO;
-import edu.mum.mumscrum.datalayer.model.Employee;
 import edu.mum.mumscrum.datalayer.model.Release;
 
 public class ReleaseService {

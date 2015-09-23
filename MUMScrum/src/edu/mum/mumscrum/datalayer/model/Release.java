@@ -1,7 +1,6 @@
 package edu.mum.mumscrum.datalayer.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the "RELEASE" database table.
@@ -32,9 +29,8 @@ public class Release implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RELEASE_SEQ")
 	private long id;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "RELS_DATE")
-	private Date relsDate;
+	private String relsDate;
 
 	@Column(name = "RELS_DESC")
 	private String relsDesc;
@@ -71,11 +67,11 @@ public class Release implements Serializable {
 		this.id = id;
 	}
 
-	public Date getRelsDate() {
+	public String getRelsDate() {
 		return this.relsDate;
 	}
 
-	public void setRelsDate(Date relsDate) {
+	public void setRelsDate(String relsDate) {
 		this.relsDate = relsDate;
 	}
 

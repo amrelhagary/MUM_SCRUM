@@ -5,7 +5,7 @@ import java.util.Base64;
 import java.util.StringTokenizer;
 
 import edu.mum.mumscrum.common.ConfigurationConstants;
-import edu.mum.mumscrum.databean.AuthenticationBean;
+import edu.mum.mumscrum.databean.AuthenticationDataBean;
 import edu.mum.mumscrum.datalayer.model.Employee;
 
 public class AuthenticationService {
@@ -15,7 +15,7 @@ public class AuthenticationService {
 		employeeService = new EmployeeService();
 	}
 
-	public String authenticate(AuthenticationBean authenticationObject) {
+	public String authenticate(AuthenticationDataBean authenticationObject) {
 		if (authenticationObject.getUsername() == null
 				|| authenticationObject.getPassword() == null) {
 			return ConfigurationConstants.ResponseMessage.AUTHENTICATION_FAILED;

@@ -1,13 +1,20 @@
 package edu.mum.mumscrum.databean;
 
-public class AuthenticationBean {
+public class AuthenticationDataBean {
 
-	
-	//TODO: implement employee object
+	// TODO: implement employee object
 	private String username;
 	private String password;
 	private String roleDesc;
 	private String homeRoute;
+
+	public AuthenticationDataBean(String username, String password,
+			String roleDesc, String homeRoute) {
+		this.username = username;
+		this.password = password;
+		this.roleDesc = roleDesc;
+		this.homeRoute = homeRoute;
+	}
 
 	public String getUsername() {
 		return username;

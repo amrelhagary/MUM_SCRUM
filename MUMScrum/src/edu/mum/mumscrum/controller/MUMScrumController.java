@@ -1,11 +1,10 @@
 package edu.mum.mumscrum.controller;
 
-import edu.mum.mumscrum.databean.ResponseBean;
+import edu.mum.mumscrum.databean.ResponseDataBean;
 
 public class MUMScrumController {
-	protected ResponseBean responseObject;
+	protected ResponseDataBean responseObject;
 
 	public MUMScrumController() {
-		responseObject = new ResponseBean();
 	}
 }

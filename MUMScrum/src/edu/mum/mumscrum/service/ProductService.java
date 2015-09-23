@@ -37,4 +37,9 @@ public class ProductService {
 		return productDAO.deleteProductById(id);
 	}
 
+	public void deleteAllChild(String id) {
+		productDAO.deleteAllChild(id,"PROGRESS_RECORD","name","name");
+		
+	}
+
 }

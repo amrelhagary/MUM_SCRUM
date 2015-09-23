@@ -1,9 +1,15 @@
 package edu.mum.mumscrum.databean;
 
-public class ResponseBean {
+public class ResponseDataBean {
 	private String status;
 	private String message;
 	private Object data;
+
+	public ResponseDataBean(String status, String message, Object data) {
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
 
 	public String getStatus() {
 		return status;

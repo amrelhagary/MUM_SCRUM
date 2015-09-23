@@ -148,4 +148,26 @@ public class MUMScrumDAO {
 		deleteAllObjects(clone);
 		return clone;
 	}
+
+	public int deleteAllChild(String d1 ) {
+		instantiateConnection();
+		try {
+			System.out.println(d1);
+			uow.executeNonSelectingCall(new SQLCall(d1));
+
+			System.out.println("scec");
+//			uow.executeNonSelectingCall(new SQLCall(updatequery1));
+			return 1;// Success 
+			
+		} catch (Exception ex) {
+			
+			System.out.println(" MumScrumDao.executeJpqlUpdate catch msg " + ex.getMessage());
+			return -1;// fail
+		
+		} finally {
+			
+			System.out.println(" terminate Connection ");
+			terminateConnection();
+		}
+	}
 }
