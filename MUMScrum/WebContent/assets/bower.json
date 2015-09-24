@@ -24,6 +24,7 @@
     "angularjs-toaster": "*",
     "angular-animate": "~1.4.5",
     "angular-cookies": "1.4.5",
-    "ngDraggable": "~0.1.8"
+    "ngDraggable": "~0.1.8",
+    "angular-google-chart": "~0.0.11"
   }
 }
