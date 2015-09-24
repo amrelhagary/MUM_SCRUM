@@ -5,6 +5,10 @@ public class DateDataBean {
 	private int month;
 	private int year;
 
+	public DateDataBean() {
+
+	}
+
 	public DateDataBean(int day, int month, int year) {
 		this.day = day;
 		this.month = month;

@@ -45,6 +45,10 @@ public class EmployeeDAO {
 				expression, SortingType.ASCENDING, "firstName");
 	}
 
+	public List<Employee> getAllScrumMastersNotAssignedToRelease() {
+		return null;
+	}
+
 	public Employee getEmployeeById(String id) {
 		Expression expression = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.getObjectByExpression(Employee.class, expression);
@@ -83,11 +87,6 @@ public class EmployeeDAO {
 		mumScrumDAO.executeNonSelectingSQLCall(up2);
 		mumScrumDAO.executeNonSelectingSQLCall(up3);
 		mumScrumDAO.executeNonSelectingSQLCall(up4);
-	}
-
-	public List<Employee> getAllScrumMastersNotAssignedToRelease() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

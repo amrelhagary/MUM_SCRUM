@@ -54,8 +54,8 @@ public class ConfigurationConstants {
 
 		PRODUCT_OWNER(1, "Product Owner", "/project"), SCRUM_MASTER(2,
 				"Scrum Master", "/sprint"), DEVELOPER(3, "Developer",
-				"/userstory"), TESTER(4, "Tester", "/userstory"), HR_ADMIN(5,
-				"HR Admin", "/employee");
+				"/userstory/assignee"), TESTER(4, "Tester",
+				"/userstory/assignee"), HR_ADMIN(5, "HR Admin", "/employee");
 
 		private int id;
 		private String name;
@@ -93,8 +93,8 @@ public class ConfigurationConstants {
 	}
 
 	public interface ProgressRecordStateFlag {
-		public final static long START = 0;
-		public final static long STOP = 1;
+		public final static long START = 1;
+		public final static long STOP = 2;
 	}
 
 }

@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * The persistent class for the PROGRESS_RECORD database table.
@@ -30,10 +29,8 @@ public class ProgressRecord implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROGRESS_RECORD_SEQ")
 	private long id;
 
-	private long diff;
-
 	private long flag;
-	
+
 	@Column(name = "START_TIME")
 	private long startTime;
 
@@ -61,14 +58,6 @@ public class ProgressRecord implements Serializable {
 		this.id = id;
 	}
 
-	public long getDiff() {
-		return this.diff;
-	}
-
-	public void setDiff(long diff) {
-		this.diff = diff;
-	}
-
 	public long getFlag() {
 		return this.flag;
 	}
@@ -92,6 +81,7 @@ public class ProgressRecord implements Serializable {
 	public void setStopTime(long stopTime) {
 		this.stopTime = stopTime;
 	}
+
 	public Sprint getSprint() {
 		return this.sprint;
 	}
