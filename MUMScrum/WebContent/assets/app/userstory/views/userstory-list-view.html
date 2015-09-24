@@ -23,7 +23,7 @@
 						<th>Severity</th>
 						<th ng-show="globals.currentUser.user_role === 'Product Owner'"></th>
 						<td ng-show="globals.currentUser.user_role === 'Scrum Master'">
-						Assign
+							Assign
 						</td>
 					</tr>
 					<tr ng-repeat="userstory in userstories | filter: searchUserstory">
@@ -46,6 +46,7 @@
 						<td>
 							{{ userstory.severity.severityDesc }}
 						</td>
+						<td>Actions</td>
 						<td ng-show="globals.currentUser.user_role === 'Product Owner'">                                            
 							<div class="tools">
 								<a href="#/userstory/edit/{{userstory.id}}"><i class="fa fa-edit"></i></a>
@@ -58,11 +59,13 @@
 								<a href="#/userstory/assign/{{userstory.id}}"><i class="glyphicon glyphicon-user"></i></a>
 							</div>
 						</td>
-
+						<td>
+							<a href='#/userstory/details/{{userstory.id}}'><i class="glyphicon glyphicon-time"></i></a>
+						</td>
 					</tr>
 				</table>
 			</div><!-- /.box-body -->
-			<div class="box-footer clearfix no-border">
+			<div class="box-footer clearfix no-border" ng-show="globals.currentUser.user_role === 'Product Owner'">
 				<a class="btn btn-default pull-right" ng-href="#/userstory/add"><i class="fa fa-plus"></i> Create User Story</a>
 			</div>
 		</div><!-- /.box -->

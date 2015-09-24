@@ -15,6 +15,19 @@ angular
 		      'query': { method:'GET',isArray:false }
 		    });
   }])
+	.factory('GetAllUserStoryByUserId', ['$resource',
+		  function($resource){
+		    return $resource('http://localhost:8085/MUMScrum/API/UserStoryControllerWS/assignee/:UserId/userstory', {}, {
+		      'query': { method:'GET',isArray:false }
+		    });
+  }])
+	.factory('UserStoryGetById', ['$resource',
+		  function($resource){
+		    return $resource('http://localhost:8085/MUMScrum/API/UserStoryControllerWS/userstory/:id', {}, {
+		      'query': { method:'GET',isArray:false },
+		      'update': { method: 'PUT' }
+		    });
+  }])
 	.factory('UserstoryBySprintId', ['$resource',
 		  function($resource){
 		    return $resource('http://localhost:8085/MUMScrum/API/UserStoryControllerWS/sprint/:sprintId/userstory', {}, {
