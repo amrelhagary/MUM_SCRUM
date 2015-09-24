@@ -3,7 +3,8 @@
 angular
 	.module('scrumApp.sprint', [
 		'ngResource',
-		'ngDraggable'
+		'ngDraggable',
+		'googlechart'
 	])
 	.config(['$routeProvider', function($routeProvider) {
 		
@@ -165,13 +166,67 @@ angular
         // }
 
 	}])
-	.controller('BurndownCtrl', ['SprintFactory','ProgressRecordFactory','$routeParams',
-		function(SprintFactory,ProgressRecordFactory,$routeParams){
+	.controller('BurndownCtrl', ['$scope','SprintFactory','ProgressRecordFactory','$routeParams',
+		function($scope,SprintFactory,ProgressRecordFactory,$routeParams){
 		var sprintId = $routeParams.id;
 
-		ProgressRecordFactory.get({id: sprintId},function(response){
-			
-		})
+		var sprint = SprintFactory.get({id: sprintId});
+
+		sprint.$promise.then(function(response){
+			$scope.sprint = response.data;
+
+
+			ProgressRecordFactory.get({id: sprintId},function(response){
+			if(response.status == 'ok'){
+				var dummyData = [
+					{"dateObj":{"day":24,"month":9,"year":2015},"actualEffort":3.0,"estimatedEffort":3.0},
+					{"dateObj":{"day":25,"month":9,"year":2015},"actualEffort":2.5,"estimatedEffort":2.0},
+					{"dateObj":{"day":26,"month":9,"year":2015},"actualEffort":.25,"estimatedEffort":1.0},
+					{"dateObj":{"day":27,"month":9,"year":2015},"actualEffort":0.1,"estimatedEffort":0.0},
+				]
+				// $scope.drawChart(response.data);
+				$scope.drawChart(dummyData)
+			};
+		});
+
+		});
+
+		
+
+		$scope.drawChart = function(data)
+		{
+			$scope.chartObject = {};
+			var rows = [];
+			for(var i = 0;i < data.length;i++)
+			{
+				var dateObj = data[i].dateObj;
+				var dateType = new Date(dateObj.year,dateObj.month,dateObj.day);
+				var row = {
+					c : [
+						{ v: dateType },
+						{ v: data[i].actualEffort },
+						{ v: data[i].estimatedEffort }
+					]
+				};
+				rows.push(row);
+			}
+			$scope.chartObject.data = {
+				"cols": [
+					{ id: "m",label: "Month",type: "date" },
+					{ id: "a",label: "Actual Effort",type: "number"},
+					{ id: "e",label: "Estimated Effort",type: "number" }
+				],"rows": rows
+			};
+
+			$scope.chartObject.type = 'LineChart';
+			$scope.chartObject.options = { 
+				'title': 'Burn down chart for Sprint: ' + $scope.sprint.sprName,
+				series: {
+		          0: { axis: 'a' },
+		          1: { axis: 'e',lineWidth: 3,lineDashStyle: [7, 2, 4, 3]}
+		      }
+			}
+		};
 	}])
 	.directive('sprintForm',[function(){
 		return {
