@@ -37,6 +37,10 @@ public class Userstory implements Serializable {
 	@Column(name = "US_NAME")
 	private String usName;
 
+	@Column (name = "US_STATUS")
+	private long usStatus;
+	
+
 	// bi-directional many-to-one association to Employee
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "EMP_ID")
@@ -103,7 +107,14 @@ public class Userstory implements Serializable {
 	public void setUsName(String usName) {
 		this.usName = usName;
 	}
+	
+	public long getUsStatus() {
+		return this.usStatus;
+	}
 
+	public void setUsStatus(long usStatus) {
+		this.usStatus = usStatus;
+	}
 	public Employee getEmployee() {
 		return this.employee;
 	}
