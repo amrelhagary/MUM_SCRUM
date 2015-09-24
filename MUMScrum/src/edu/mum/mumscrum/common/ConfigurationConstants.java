@@ -93,6 +93,12 @@ public class ConfigurationConstants {
 	}
 
 	public interface ProgressRecordStateFlag {
+		public final static long DEFAULT = 0;
+		public final static long START = 1;
+		public final static long STOP = 2;
+	}
+
+	public interface UserStoryStateFlag {
 		public final static long START = 1;
 		public final static long STOP = 2;
 	}

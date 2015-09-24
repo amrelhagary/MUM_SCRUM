@@ -7,6 +7,7 @@ import org.eclipse.persistence.expressions.ExpressionBuilder;
 
 import edu.mum.mumscrum.common.ConfigurationConstants.ProgressRecordStateFlag;
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
+import edu.mum.mumscrum.common.ConfigurationConstants.UserStoryStateFlag;
 import edu.mum.mumscrum.databean.ProgressRecordDataBean;
 import edu.mum.mumscrum.datalayer.model.ProgressRecord;
 
@@ -56,13 +57,7 @@ public class ProgressRecordDAO {
 		return rec;
 	}
 
-	public String setUsStatusId(long usstatusid, long usid) {
-		String upsql = "UPDATE USERSTORY SET US_STATUS = " + usstatusid
-				+ " where id = " + usid;
-		return upsql;
-	}
-
-	public int startEndTimeEstm(ProgressRecordDataBean pr, long flagid,
+	public ProgressRecordDataBean startEndTimeEstm(ProgressRecordDataBean pr, long flagid,
 			long curtime) {
 
 		long usid = pr.getUserstory().getId();
@@ -70,27 +65,34 @@ public class ProgressRecordDAO {
 		long ussttus = pr.getUserstory().getUsStatus();
 		System.out.println(usid + " usid " + ussttus + " us status " + usname
 				+ "  usname");
+		
+		
 		String updatesql = " UPDATE PROGRESS_RECORD pr SET pr.STOP_TIME = "
 				+ curtime
-				+ ", pr.FLAG = 2 where  pr.USID = "
+				+ ", pr.FLAG =" + ProgressRecordStateFlag.STOP + "where  pr.USID = "
 				+ usid
-				+ " and pr.flag  =  1 and pr.stop_time = 0 AND PR.ID = (SELECT MAX(ID) FROM PROGRESS_RECORD pr where  pr.USID = "
+				+ " and pr.flag  = " + ProgressRecordStateFlag.START + " and pr.stop_time = " + ProgressRecordStateFlag.DEFAULT 
+				+ " AND PR.ID = (SELECT MAX(ID) FROM PROGRESS_RECORD pr where  pr.USID = "
 				+ usid + ")";
 
 		String insertsql = "INSERT INTO PROGRESS_RECORD( USID , START_TIME,  STOP_TIME , FLAG	, SPR_ID ) VALUES( "
-				+ usid + " , " + curtime + " , " + 0 + " , " + // STOP TIME SET
+				+ usid + " , " + curtime + " , " + ProgressRecordStateFlag.DEFAULT + " , " + // STOP TIME SET
 																// TO 0
-				1 + " , " + // FLAG SET TO START
+				ProgressRecordStateFlag.START + " , " + // FLAG SET TO START
 				pr.getUserstory().getSprint().getId() + ")";
-		if (flagid == 1 && ussttus == 2) // usstatus = 2 closed
+		if (flagid == ProgressRecordStateFlag.START && ussttus == UserStoryStateFlag.STOP) // usstatus = 2 closed
 		{
-			mumScrumDAO.executeNonSelectingSQLCall(setUsStatusId(1, usid));
+//			mumScrumDAO.executeNonSelectingSQLCall(setUsStatusId(UserStoryStateFlag.START, usid));
+			pr.getUserstory().setUsStatus(UserStoryStateFlag.START);
+			UserStoryDAO.getInstance().updateUserStory(pr.getUserstory());
 			mumScrumDAO.executeNonSelectingSQLCall(insertsql);
-			return 1;
+			return pr;
 		} else {
-			mumScrumDAO.executeNonSelectingSQLCall(setUsStatusId(2, usid));
+//			mumScrumDAO.executeNonSelectingSQLCall(setUsStatusId(UserStoryStateFlag.STOP, usid));
+			pr.getUserstory().setUsStatus(UserStoryStateFlag.STOP);
+			pr.setUserstory(UserStoryDAO.getInstance().updateUserStory(pr.getUserstory()));
 			mumScrumDAO.executeNonSelectingSQLCall(updatesql);
-			return 2;
+			return pr;
 		}
 	}
 }
