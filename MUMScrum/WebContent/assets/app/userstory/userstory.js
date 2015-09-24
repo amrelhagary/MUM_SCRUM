@@ -31,6 +31,15 @@ angular
 				controller: 'AssignUserstoryCtrl',
 				templateUrl: 'userstory/views/userstory-assign-view.html?'+Date.now()
 			})
+			.when('/userstory/assignee/' , {
+				controller : 'UserstoryListByAssigneeCtrl',
+				templateUrl : 'userstory/views/userstory-list-view.html?' + Date.now(),
+			})
+
+			.when('/userstory/details/:id' , {
+				controller : 'UserstoryGetCtrl',
+				templateUrl : 'userstory/views/userstory-details-view.html?' + Date.now(),
+			})
 	}])
 	.controller('UserstoryAddCtrl', ['$scope','UserstoryFactory','ProductFactory','$http','$location','$routeParams','toaster',
 		function($scope,UserstoryFactory,ProductFactory,$http,$location,$routeParams,toaster){
@@ -49,11 +58,26 @@ angular
 							toaster.pop('error',"Error",response.message);
 						}
 					});
-
-
 				}
 			}
   	}])
+  	.controller('UserstoryListByAssigneeCtrl', ['$scope', '$rootScope','GetAllUserStoryByUserId','$location','$routeParams','toaster',
+		function($scope ,$rootScope,GetAllUserStoryByUserId,$location,$routeParams,toaster){
+				var UserId = $rootScope.globals.currentUser.user.id;
+
+				console.log(UserId);
+				GetAllUserStoryByUserId.query({UserId : UserId} , function(response){
+	    		if(response.status == 'ok')
+	    			$scope.userstories = response.data;
+	    		else
+	    			toaster.pop('error',"Error",response.message);
+	    		
+
+	    		//console.log($scope.userstories);
+			})
+  	}])
+
+
 	.controller('UserstoryListCtrl', ['$scope','UserstoryByProductId','UserstoryFactory','$routeParams','toaster',
 		function($scope,UserstoryByProductId,UserstoryFactory,$routeParams,toaster){
 			var productId = $routeParams.id;
@@ -108,7 +132,53 @@ angular
 			}
 
 		}
+	
 	}])
+
+	.controller('UserstoryGetCtrl', ['$scope','UserStoryGetById','$routeParams','$location','toaster', 
+		function($scope,UserStoryGetById,$routeParams,$location,toaster){
+			
+			var userstoryId = $routeParams.id;
+			UserStoryGetById.get({id: userstoryId},function(response){
+				$scope.userstory = response.data;
+			});
+
+			$scope.updateUserstory = function(isValid){
+			if(isValid)
+			{
+				UserStoryGetById.update($scope.userstory,function(response){
+					if(response.status == 'ok')
+					{
+						$location.path('/userstory/assignee');
+						toaster.pop('success',"Update Userstory","Userstory Record Updated Successfully");
+					}else{
+						toaster.pop('error',"Error",response.message);
+					}
+				})
+			}
+
+		}
+			console.log($scope.userstory);
+
+			// AssignList.get(function(response){
+			// 	$scope.assignList = response.data;
+			// });
+
+			// $scope.assignUserstory = function(isValid)
+			// {
+			// 	UserstoryFactory.update($scope.userstory,function(response){
+			// 		if(response.status == 'ok')
+			// 		{
+			// 			$location.path('/userstory');
+			// 			toaster.pop('success',"Update Userstory","Userstory Record Updated Successfully");
+			// 		}else{
+			// 			toaster.pop('error',"Error",response.message);
+			// 		}
+			// 	})
+			// }
+		
+	}])
+
 	.controller('AssignUserstoryCtrl', ['$scope','UserstoryFactory','AssignList','$routeParams','$location','toaster', 
 		function($scope,UserstoryFactory,AssignList,$routeParams,$location,toaster){
 			
@@ -139,6 +209,12 @@ angular
 		return {
 			restrict: 'E',
 			templateUrl: 'userstory/views/_form.html'
+		}
+	}])
+	.directive('userstoryDetailsForm',[function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'userstory/views/_userStoryDetails.html'
 		}
 	}])
 	.directive('employeeList',['EmployeeFactory',function(EmployeeFactory){

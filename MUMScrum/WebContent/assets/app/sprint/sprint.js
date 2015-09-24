@@ -2,7 +2,8 @@
 
 angular
 	.module('scrumApp.sprint', [
-		'ngResource'
+		'ngResource',
+		'ngDraggable'
 	])
 	.config(['$routeProvider', function($routeProvider) {
 		
@@ -18,6 +19,10 @@ angular
 			.when('/sprint/edit/:id',{
 				controller: 'SprintEditCtrl',
 				templateUrl: 'sprint/views/sprint-edit-view.html?'+ Date.now()
+			})
+			.when('/add/userstory/sprint/:id',{
+				controller: 'AddUserstoryToSprint',
+				templateUrl: 'sprint/views/add-userstory-sprint.html?'+ Date.now()
 			})
 	}])
 	.controller('SprintAddCtrl', ['$scope','SprintFactory','$http','$location','toaster',
@@ -49,7 +54,7 @@ angular
 	    	});
 
 	    $scope.deleteSprint = function(sprintId,index){
-	    	
+
 			SprintFactory.delete({id: sprintId},function(response){
 				if(response.status == 'ok')
 				{
@@ -71,6 +76,61 @@ angular
 				toaster.pop('success',"Update Sprint","Sprint Record Updated Successfully");
 			})
 		}
+	}])
+	.controller('AddUserstoryToSprint',['$scope','UserstoryBySprintId','NonSprintUserstory','UserstoryFactory','$routeParams','SprintFactory',
+		function($scope,UserstoryBySprintId,NonSprintUserstory,UserstoryFactory,$routeParams,SprintFactory){
+
+		var sprintId = $routeParams.id;
+
+		$scope.userstoriesAssignedToSprint = [];
+		$scope.userstoriesNotAssigned = [];
+
+		//get list of user stories assigned to sprint , by giving sprint id
+		UserstoryBySprintId.get({ sprintId: sprintId },function(response){
+			$scope.userstoriesAssignedToSprint = response.data;
+		});
+
+		//get list of userstories not assigned to sprint
+		NonSprintUserstory.get(function(response){
+			$scope.userstoriesNotAssigned = response.data;
+		});
+
+		SprintFactory.get({id: sprintId},function(response){
+			$scope.sprint  = response.data;
+		})
+
+		$scope.onDropComplete = function(userstory,evt){
+            var index = $scope.userstoriesAssignedToSprint.indexOf(userstory);
+            if (index == -1)
+            {
+
+            	// update index in dropped area
+            	$scope.userstoriesAssignedToSprint.push(userstory);
+            	userstory.sprint = $scope.sprint;
+
+
+            	// remove index from dragged area
+            	var index = $scope.userstoriesNotAssigned.indexOf(userstory);
+            	if (index > -1) {
+            		$scope.userstoriesNotAssigned.splice(index, 1);
+            	}
+
+            	UserstoryFactory.update(userstory,function(response){
+            		console.log(response)
+            	})
+
+            }
+        }
+
+        $scope.onDragSuccess=function(userstory,evt){
+
+            var index = $scope.userstoriesNotAssigned.indexOf(userstory);
+            console.log(index)
+            if (index > -1) {
+                $scope.userstoriesNotAssigned.splice(index, 1);
+            }
+        }
+
 	}])
 	.directive('sprintForm',[function(){
 		return {
