@@ -7,16 +7,16 @@
 				</div><!-- /.box-header -->
 					List of User Stories Assigned to Sprint
 					<div>
-							<div class="scrollit">
+							<div>
 							<span>Title</span>
-								<div ng-drop="true" ng-drop-success="onDropComplete($data,$event)"
-								 ></div>
-								<ul ng-repeat="userstory in userstoriesAssignedToSprint">
-									<li>
+								<ul class="list-group">
+									<li ng-repeat="userstory in userstoriesAssignedToSprint" class="list-group-item">
 										{{ userstory.usName}}
 									</li>
 								</ul>
 							</div>
+							<div ng-drop="true" ng-drop-success="onDropComplete($data,$event)"
+							></div>
 					</div>
 				</div>
 				<div class="box box-primary">
@@ -28,8 +28,8 @@
 					<div>
 						<div class="scrollit">
 							<span>Title</span>
-							<ul ng-repeat="userstory in userstoriesNotAssigned">
-								<li ng-drag="true" ng-drag-data="userstory" data-allow-transform="true">
+							<ul class="list-group">
+								<li ng-repeat="userstory in userstoriesNotAssigned" ng-drag="true" ng-drag-data="userstory" data-allow-transform="true" class="list-group-item">
 									{{ userstory.usName}}
 								</li>
 							</ul>
