@@ -52,7 +52,7 @@ public class ConfigurationConstants {
 
 	public enum RoleTypeHomeRoute {
 
-		PRODUCT_OWNER(1, "Product Owner", "/project"), SCRUM_MASTER(2,
+		PRODUCT_OWNER(1, "Product Owner", "/product"), SCRUM_MASTER(2,
 				"Scrum Master", "/sprint"), DEVELOPER(3, "Developer",
 				"/userstory/assignee"), TESTER(4, "Tester",
 				"/userstory/assignee"), HR_ADMIN(5, "HR Admin", "/employee");
