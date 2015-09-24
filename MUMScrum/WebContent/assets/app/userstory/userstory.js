@@ -144,8 +144,8 @@ angular
 
 			// start : 1, stop : 2
 			$scope.updateProgress = function(){		
-				var statusFlag = $scope.userstory.usStatus;
-				$scope.userstory.usStatus = ($scope.userstory.usStatus) === 1 ? 2: 1;
+				var statusFlag = ($scope.userstory.usStatus) === 1 ? 2: 1;
+				// $scope.userstory.usStatus = ($scope.userstory.usStatus) === 1 ? 2: 1;
 				var obj = {
 					userstory: $scope.userstory,
 					startStopFlag: statusFlag
@@ -155,6 +155,7 @@ angular
 					if(response.status == 'ok')
 					{
 						toaster.pop('success',"Update Userstory","Userstory Record Updated Successfully");
+						$scope.userstory.usStatus = ($scope.userstory.usStatus) === 1 ? 2: 1;
 					}else{
 						toaster.pop('error',"Error",response.message);
 					}
