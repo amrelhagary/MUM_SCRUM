@@ -34,12 +34,6 @@ public class ProgressRecord implements Serializable {
 
 	private long flag;
 	
-	@Transient
-	private long sprintid;
-	
-	@Transient
-	private long userstoryid;
-
 	@Column(name = "START_TIME")
 	private long startTime;
 
@@ -112,21 +106,6 @@ public class ProgressRecord implements Serializable {
 
 	public void setUserstory(Userstory userstory) {
 		this.userstory = userstory;
-	}
-/// Added for inserting/updating PROGRESS_RECORD table \\\\
-	public long getSprintid() {
-		return this.sprint.getId();
-	}
-
-	public void setSprintid(long sprintid) {
-		this.sprint.setId(sprintid);
-	}
-	public long getUserstoryid() {
-		return getUserstory().getId() ;
-	}
-
-	public void setUserstoryid(long userstoryid) {
-		this.userstory.setId(userstoryid);
 	}
 
 }

@@ -28,6 +28,10 @@ public class UserStoryService {
 		return userStoryDAO.getAllUserStoriesNotAssignedToSprint();
 	}
 
+	public List<Userstory> getAllUserStoriesByAssigneeId(String assigneeId) {
+		return userStoryDAO.getAllUserStoriesByAssigneeId(assigneeId);
+	}
+
 	public Userstory getUserStoryById(String id) {
 		return userStoryDAO.getUserStoryById(id);
 	}

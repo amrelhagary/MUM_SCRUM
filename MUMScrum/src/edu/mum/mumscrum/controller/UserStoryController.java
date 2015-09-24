@@ -89,6 +89,21 @@ public class UserStoryController extends MUMScrumController {
 	}
 
 	@GET
+	@Path("/assignee/{id}/userstory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUserStoriesByAssigneeId(
+			@PathParam("id") String assigneeId) {
+		List<Userstory> userStoriesList = userStoryService
+				.getAllUserStoriesByAssigneeId(assigneeId);
+		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
+				ErrorMessage.SUCCESS, userStoriesList);
+		JsonObject result = MUMScrumUtil
+				.prepareJsonObjectResponse(responseObject);
+		return Response.status(HttpURLConnection.HTTP_OK)
+				.entity(result.toString()).build();
+	}
+
+	@GET
 	@Path("/userstory/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserStoryById(@PathParam("id") String id) {
