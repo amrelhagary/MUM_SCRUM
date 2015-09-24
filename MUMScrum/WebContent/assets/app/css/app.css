@@ -66,4 +66,5 @@
 .scrollit {
     overflow:scroll;
     height:300px;
+    overflow-x: hidden;
 }
