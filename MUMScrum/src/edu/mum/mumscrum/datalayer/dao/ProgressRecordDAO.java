@@ -7,6 +7,7 @@ import org.eclipse.persistence.expressions.ExpressionBuilder;
 
 import edu.mum.mumscrum.common.ConfigurationConstants.ProgressRecordStateFlag;
 import edu.mum.mumscrum.common.ConfigurationConstants.SortingType;
+import edu.mum.mumscrum.databean.ProgressRecordDataBean;
 import edu.mum.mumscrum.datalayer.model.ProgressRecord;
 
 public class ProgressRecordDAO {
@@ -61,12 +62,12 @@ public class ProgressRecordDAO {
 		return upsql;
 	}
 
-	public int startEndTimeEstm(ProgressRecord progressrecord, long flagid,
+	public int startEndTimeEstm(ProgressRecordDataBean pr, long flagid,
 			long curtime) {
 
-		long usid = progressrecord.getUserstory().getId();
-		String usname = progressrecord.getUserstory().getUsName();
-		long ussttus = progressrecord.getUserstory().getUsStatus();
+		long usid = pr.getUserstory().getId();
+		String usname = pr.getUserstory().getUsName();
+		long ussttus = pr.getUserstory().getUsStatus();
 		System.out.println(usid + " usid " + ussttus + " us status " + usname
 				+ "  usname");
 		String updatesql = " UPDATE PROGRESS_RECORD pr SET pr.STOP_TIME = "
@@ -80,7 +81,7 @@ public class ProgressRecordDAO {
 				+ usid + " , " + curtime + " , " + 0 + " , " + // STOP TIME SET
 																// TO 0
 				1 + " , " + // FLAG SET TO START
-				progressrecord.getSprint().getId() + ")";
+				pr.getUserstory().getSprint().getId() + ")";
 		if (flagid == 1 && ussttus == 2) // usstatus = 2 closed
 		{
 			mumScrumDAO.executeNonSelectingSQLCall(setUsStatusId(1, usid));

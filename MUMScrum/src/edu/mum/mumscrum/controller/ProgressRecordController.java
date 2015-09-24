@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 import edu.mum.mumscrum.common.ConfigurationConstants.ErrorMessage;
 import edu.mum.mumscrum.databean.BurndownChartDataBean;
 import edu.mum.mumscrum.databean.ResponseDataBean;
+import edu.mum.mumscrum.databean.ProgressRecordDataBean;
 import edu.mum.mumscrum.datalayer.model.ProgressRecord;
 import edu.mum.mumscrum.service.ProgressRecordService;
 import edu.mum.mumscrum.utility.MUMScrumUtil;
@@ -62,8 +63,9 @@ public class ProgressRecordController extends MUMScrumController {
 	@Path("/progress_record")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response setStartTime(ProgressRecord pr) {
-		ProgressRecord prorec = progressRecordService.ckeckFlagStatus(pr);
+	public Response setStartTime(ProgressRecordDataBean pr) {
+		ProgressRecordDataBean prorec = progressRecordService
+				.ckeckFlagStatus(pr);
 		responseObject = new ResponseDataBean(ErrorMessage.SUCCESS,
 				ErrorMessage.SUCCESS, prorec);
 		JsonObject result = MUMScrumUtil

@@ -7,6 +7,7 @@ import java.util.List;
 
 import edu.mum.mumscrum.databean.BurndownChartDataBean;
 import edu.mum.mumscrum.databean.DateDataBean;
+import edu.mum.mumscrum.databean.ProgressRecordDataBean;
 import edu.mum.mumscrum.datalayer.dao.ProgressRecordDAO;
 import edu.mum.mumscrum.datalayer.model.ProgressRecord;
 
@@ -100,8 +101,8 @@ public class ProgressRecordService {
 
 	// /////delete
 
-	public ProgressRecord ckeckFlagStatus(ProgressRecord pr) {
-		long flagid = pr.getFlag(); // flagId
+	public ProgressRecordDataBean ckeckFlagStatus(ProgressRecordDataBean pr) {
+		long flagid = pr.getStartStopFlag(); // flagId
 		Date date = new Date();
 		long curtime = date.getTime();// get current time
 		progressRecordDAO.startEndTimeEstm(pr, flagid, curtime);
