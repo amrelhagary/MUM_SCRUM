@@ -56,7 +56,7 @@
         
         <header class="header" ng-switch on="globals.currentUser.is_auth">
             <div ng-switch-when="true">
-                <header-menu></header-menu>
+                <header-menu current-user="globals.currentUser.user"></header-menu>
             </div>
         </header>
 

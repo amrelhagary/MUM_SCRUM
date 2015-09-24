@@ -35,7 +35,7 @@
 						<td><span class="label" ng-class="emp.status.statusId == '1' ? 'label-success': 'label-danger' ">{{ emp.status.statusDesc | capitalize }}</span></td>
 
 						<td>                                            
-							<div class="tools">
+							<div class="tools" ng-show="globals.currentUser.user_role === 'HR Admin'">
 								<a href="#/employee/edit/{{emp.id}}"><i class="fa fa-edit"></i></a>
 								<a href="javascript: void(0)" ng-click="deleteEmployee(emp.id,$index)"><i class="fa fa-trash-o"></i></a>
 							</div>
@@ -43,7 +43,7 @@
 					</tr>
 				</table>
 			</div><!-- /.box-body -->
-			<div class="box-footer clearfix no-border">
+			<div class="box-footer clearfix no-border" ng-show="globals.currentUser.user_role === 'HR Admin'">
 				<a class="btn btn-default pull-right" ng-href="#/employee/add"><i class="fa fa-plus"></i> Add Employee</a>
 			</div>
 		</div><!-- /.box -->
