@@ -49,6 +49,13 @@ public class UserStoryDAO {
 				expression, SortingType.ASCENDING, "id");
 	}
 
+	public List<Userstory> getAllUserStoriesByAssigneeId(String assigneeId) {
+		Expression expression = new ExpressionBuilder().get("employee")
+				.get("id").equal(assigneeId);
+		return mumScrumDAO.getAllObjectsByExpression(Userstory.class,
+				expression, SortingType.ASCENDING, "id");
+	}
+
 	public Userstory getUserStoryById(String id) {
 		Expression expression = new ExpressionBuilder().get("id").equal(id);
 		return mumScrumDAO.getObjectByExpression(Userstory.class, expression);
@@ -71,5 +78,4 @@ public class UserStoryDAO {
 		return mumScrumDAO.deleteAllObjectsBasedOnExpression(Userstory.class,
 				expression);
 	}
-
 }
