@@ -21,10 +21,21 @@ angular
 				templateUrl: 'sprint/views/sprint-edit-view.html?'+ Date.now()
 			})
 			.when('/add/userstory/sprint/:id',{
-				controller: 'AddUserstoryToSprint',
+				controller: 'AddUserstoryToSprintCtrl',
 				templateUrl: 'sprint/views/add-userstory-sprint.html?'+ Date.now()
 			})
+			.when('/burndown/:id',{
+				controller: 'BurndownCtrl',
+				templateUrl: 'sprint/views/burndown-sprint-view.html?'+ Date.now()
+			});
 	}])
+	.value('googleChartApiConfig', {
+            version: '1',
+            optionalSettings: {
+                packages: ['corechart', 'gauge'],
+                language: 'en'
+            }
+    })
 	.controller('SprintAddCtrl', ['$scope','SprintFactory','$http','$location','toaster',
 		function($scope,SprintFactory,$http,$location,toaster){
 			$scope.addSprint = function(isValid)
@@ -77,7 +88,7 @@ angular
 			})
 		}
 	}])
-	.controller('AddUserstoryToSprint',['$scope','UserstoryBySprintId','NonSprintUserstory','UserstoryFactory','$routeParams','SprintFactory',
+	.controller('AddUserstoryToSprintCtrl',['$scope','UserstoryBySprintId','NonSprintUserstory','UserstoryFactory','$routeParams','SprintFactory',
 		function($scope,UserstoryBySprintId,NonSprintUserstory,UserstoryFactory,$routeParams,SprintFactory){
 
 		var sprintId = $routeParams.id;
@@ -153,6 +164,14 @@ angular
         //     }
         // }
 
+	}])
+	.controller('BurndownCtrl', ['SprintFactory','ProgressRecordFactory','$routeParams',
+		function(SprintFactory,ProgressRecordFactory,$routeParams){
+		var sprintId = $routeParams.id;
+
+		ProgressRecordFactory.get({id: sprintId},function(response){
+			
+		})
 	}])
 	.directive('sprintForm',[function(){
 		return {

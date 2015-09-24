@@ -34,8 +34,10 @@
 						<td>                                            
 							<div class="tools">
 								<a href="#/sprint/edit/{{sprint.id}}"><i class="fa fa-edit"></i></a>
-								<a href="javascript: void(0)" ng-click="deleteSprint(sprint.id,$index)"><i class="fa fa-trash-o"></i></a>
+								<a href="javascript: void(0)" ng-click="deleteSprint(sprint.id,$index)">
+								<i class="fa fa-trash-o"></i></a>
 								<a href="#/add/userstory/sprint/{{sprint.id}}"><i class="fa fa-plus"></i></a>
+								<a href="#/burndown/{{sprint.id}}"><i class="fa fa-bar-chart"></i></a>
 							</div>
 						</td>
 					</tr>
