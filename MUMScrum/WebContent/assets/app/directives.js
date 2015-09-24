@@ -2,6 +2,9 @@ scrumApp
 	.directive('headerMenu',function(){
 		return {
 			restrict : 'E',
+			scope: {
+				currentUser: "="
+			},
 			replace: true,
 			templateUrl: 'partials/header_menu.html'
 		}
