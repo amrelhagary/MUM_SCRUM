@@ -134,51 +134,33 @@ angular
 		}
 	
 	}])
-
-	.controller('UserstoryGetCtrl', ['$scope','UserStoryGetById','$routeParams','$location','toaster', 
-		function($scope,UserStoryGetById,$routeParams,$location,toaster){
+	.controller('UserstoryGetCtrl', ['$scope','UserStoryGetById','UserstoryFactory','UpdateProgressFactory','$routeParams','$location','toaster', 
+		function($scope,UserStoryGetById,UserstoryFactory,UpdateProgressFactory,$routeParams,$location,toaster){
 			
 			var userstoryId = $routeParams.id;
 			UserStoryGetById.get({id: userstoryId},function(response){
 				$scope.userstory = response.data;
 			});
 
-			$scope.updateUserstory = function(isValid){
-			if(isValid)
-			{
-				UserStoryGetById.update($scope.userstory,function(response){
+			// start : 1, stop : 2
+			$scope.updateProgress = function(){		
+				var statusFlag = $scope.userstory.usStatus;
+				$scope.userstory.usStatus = ($scope.userstory.usStatus) === 1 ? 2: 1;
+				var obj = {
+					userstory: $scope.userstory,
+					startStopFlag: statusFlag
+				};
+
+				UpdateProgressFactory.save(obj,function(response){
 					if(response.status == 'ok')
 					{
-						$location.path('/userstory/assignee');
 						toaster.pop('success',"Update Userstory","Userstory Record Updated Successfully");
 					}else{
 						toaster.pop('error',"Error",response.message);
 					}
 				})
-			}
-
 		}
-			console.log($scope.userstory);
-
-			// AssignList.get(function(response){
-			// 	$scope.assignList = response.data;
-			// });
-
-			// $scope.assignUserstory = function(isValid)
-			// {
-			// 	UserstoryFactory.update($scope.userstory,function(response){
-			// 		if(response.status == 'ok')
-			// 		{
-			// 			$location.path('/userstory');
-			// 			toaster.pop('success',"Update Userstory","Userstory Record Updated Successfully");
-			// 		}else{
-			// 			toaster.pop('error',"Error",response.message);
-			// 		}
-			// 	})
-			// }
-		
 	}])
-
 	.controller('AssignUserstoryCtrl', ['$scope','UserstoryFactory','AssignList','$routeParams','$location','toaster', 
 		function($scope,UserstoryFactory,AssignList,$routeParams,$location,toaster){
 			

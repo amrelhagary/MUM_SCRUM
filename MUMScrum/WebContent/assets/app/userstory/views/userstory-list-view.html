@@ -22,9 +22,8 @@
 						<th>Sprint</th>
 						<th>Severity</th>
 						<th ng-show="globals.currentUser.user_role === 'Product Owner'"></th>
-						<td ng-show="globals.currentUser.user_role === 'Scrum Master'">
-							Assign
-						</td>
+						<th ng-show="globals.currentUser.user_role === 'Scrum Master'">Assign</th>
+						<th></th>
 					</tr>
 					<tr ng-repeat="userstory in userstories | filter: searchUserstory">
 
@@ -46,7 +45,6 @@
 						<td>
 							{{ userstory.severity.severityDesc }}
 						</td>
-						<td>Actions</td>
 						<td ng-show="globals.currentUser.user_role === 'Product Owner'">                                            
 							<div class="tools">
 								<a href="#/userstory/edit/{{userstory.id}}"><i class="fa fa-edit"></i></a>

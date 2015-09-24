@@ -40,3 +40,8 @@ angular
 		      'query': { method:'GET',isArray:false }
 		    });
   }])
+	.factory('UpdateProgressFactory', ['$resource',
+		  function($resource){
+		    return $resource('http://localhost:8085/MUMScrum/API/ProgressRecordControllerWS/progress_record', {}, {
+		    });
+  }])

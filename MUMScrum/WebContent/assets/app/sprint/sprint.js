@@ -99,8 +99,9 @@ angular
 			$scope.sprint  = response.data;
 		})
 
-		$scope.onDropComplete = function(userstory,evt){
+		$scope.addUserstoryToSprint = function(userstory,evt){
             var index = $scope.userstoriesAssignedToSprint.indexOf(userstory);
+
             if (index == -1)
             {
 
@@ -122,14 +123,35 @@ angular
             }
         }
 
-        $scope.onDragSuccess=function(userstory,evt){
-
+        $scope.removeUserstoryFromSprint = function(userstory,evt){
             var index = $scope.userstoriesNotAssigned.indexOf(userstory);
-            console.log(index)
+
             if (index > -1) {
                 $scope.userstoriesNotAssigned.splice(index, 1);
+
+
+                $scope.userstoriesNotAssigned.push(userstory);
+                userstory.sprint = {};
+            	
+            	var index = $scope.userstoriesAssignedToSprint.indexOf(userstory);
+            	if (index > -1) {
+            		$scope.userstoriesAssignedToSprint.splice(index, 1);
+            	}
+
+                UserstoryFactory.update(userstory,function(response){
+                	console.log(response)
+                });
             }
         }
+
+        // $scope.onDragSuccess=function(userstory,evt){
+
+        //     var index = $scope.userstoriesNotAssigned.indexOf(userstory);
+        //     console.log(index)
+        //     if (index > -1) {
+        //         $scope.userstoriesNotAssigned.splice(index, 1);
+        //     }
+        // }
 
 	}])
 	.directive('sprintForm',[function(){
