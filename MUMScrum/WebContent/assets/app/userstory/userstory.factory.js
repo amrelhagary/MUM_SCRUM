@@ -27,7 +27,16 @@ angular
 		      'query': { method:'GET',isArray:false },
 		      'update': { method: 'PUT' }
 		    });
-  }]);
-
-
-	
+  }])
+	.factory('UserstoryBySprintId', ['$resource',
+		  function($resource){
+		    return $resource('http://localhost:8085/MUMScrum/API/UserStoryControllerWS/sprint/:sprintId/userstory', {}, {
+		      'query': { method:'GET',isArray:false }
+		    });
+  }])
+	.factory('NonSprintUserstory', ['$resource',
+		  function($resource){
+		    return $resource('http://localhost:8085/MUMScrum/API/UserStoryControllerWS/nonsprint/userstory', {}, {
+		      'query': { method:'GET',isArray:false }
+		    });
+  }])
